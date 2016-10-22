@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Project WebApps 3",
   "main": "app.js",
-  "scripts": {"start": "node app.js",
+  "scripts": {
+    "start": "node app.js",
     "test": "make test"
   },
   "repository": {
@@ -28,5 +29,12 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.0.0",
     "jshint": "^2.9.3"
+  },
+  "dependencies": {
+    "cookie-parser": "1.4.3",
+    "express": "4.14.0",
+    "morgan": "1.7.0",
+    "serve-favicon": "2.3.0",
+    "socket.io": "1.5.0"
   }
 }
