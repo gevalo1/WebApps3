@@ -12,7 +12,6 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -34,8 +33,15 @@ app.use('/users', users);
 
 
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
     socket.emit('test', 'Connectedddd');
+    socket.on('drawClick', function (data) {
+        socket.broadcast.emit('draw', {
+            x: data.x,
+            y: data.y,
+            type: data.type
+        });
+    });
 });
 
 // catch 404 and forward to error handler
