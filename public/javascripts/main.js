@@ -34,7 +34,7 @@ App.init = function () {
 };
 
 
-App.socket = io.connect('http://localhost:3000');
+App.socket = io.connect();
 
 App.socket.on('draw', function(data) {
   return App.draw(data.x, data.y, data.type);
