@@ -15,8 +15,8 @@ var io = require('socket.io').listen(server);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-server.listen(3000, function(){
-    console.log('App listening at http://localhost:3000');
+server.listen(8085, function(){
+    console.log('App listening at http://localhost:8085');
 });
 
 
