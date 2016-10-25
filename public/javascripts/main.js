@@ -1,20 +1,22 @@
-var socket = io();
+const socket = io();
+const cv = $("#canvas");
+
 socket.on('test', function (data) {
     console.log(data);
 });
 
-var App = {};
+let App = {};
 
-$(document).ready(function() {
+$(document).ready(function () {
     App.init();
 });
 
 
 App.init = function () {
-    App.canvas = document.createElement('canvas');
-    App.canvas.height = $("article").height();
-    App.canvas.width = $("article").width();
-    document.getElementsByTagName('article')[0].appendChild(App.canvas);
+    App.canvas = $("<canvas></canvas>", {id: "canvas"})[0];
+    App.canvas.height = $("#cvContainer").height();
+    App.canvas.width = $("#cvContainer").width();
+    $("#cvContainer").append(App.canvas);
     App.ctx = App.canvas.getContext("2d");
     App.ctx.fillStyle = "solid";
     App.ctx.strokeStyle = "#bada55";
@@ -36,27 +38,23 @@ App.init = function () {
 
 App.socket = io.connect();
 
-App.socket.on('draw', function(data) {
-  return App.draw(data.x, data.y, data.type);
+App.socket.on('draw', function (data) {
+    return App.draw(data.x, data.y, data.type);
 });
 
 
-$('canvas').live('drag dragstart dragend', function(e) {
-  var offset, type, x, y;
-  type = e.handleObj.type;
-  offset = $(this).offset();
-  console.log($(this));
-  e.offsetX = e.layerX - offset.left;
-  e.offsetY = e.layerY - offset.top;
-  x = e.offsetX;
-  y = e.offsetY;
-  console.log(offset.left);
-  console.log(e.layerX); console.log(e.layerY);
-  //App.draw(e.offsetX, e.offsetY, type);
-  App.draw(e.layerX, e.layerY, type);
-  App.socket.emit('drawClick', {
-    x: x,
-    y: y,
-    type: type
-  });
+cv.live('drag dragstart dragend', function (e) {
+    const offset = $(this).offset();
+    
+    e.offsetX = e.layerX - offset.left;
+    e.offsetY = e.layerY - offset.top;
+
+    const type = e.handleObj.type, x = e.offsetX, y = e.layerY;
+
+    App.draw(x, y, type);
+    App.socket.emit('drawClick', {
+        x: x,
+        y: y,
+        type: type
+    });
 });
