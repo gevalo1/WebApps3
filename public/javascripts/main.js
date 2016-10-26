@@ -1,6 +1,7 @@
 const socket = io();
 const cv = $("#canvas");
 const colors = ["#000000", "#FFFFFF", "#22B14C", "#FFF200", "#FF7F27", "#ED1C24", "#00A2E8", "#3F48CC", "#A349A4"];
+let ownColor = colors[0];
 
 socket.on('test', function (data) {
     console.log(data);
@@ -12,7 +13,6 @@ $(document).ready(function () {
     App.init();
 
     $.each(colors, function(a) {
-        console.log(colors[a]);
         $("#colorOptions").append(($("<option>").val(colors[a]).text(colors[a])));
     });
 });
@@ -28,7 +28,8 @@ App.init = function () {
     App.ctx.strokeStyle = colors[0];
     App.ctx.lineWidth = 5;
     App.ctx.lineCap = "round";
-    App.draw = function (x, y, type) {
+    App.draw = function (x, y, type, color) {
+        App.ctx.strokeStyle = color;
         if (type === "dragstart") {
             App.ctx.beginPath();
             return App.ctx.moveTo(x, y);
@@ -45,7 +46,7 @@ App.init = function () {
 App.socket = io.connect();
 
 App.socket.on('draw', function (data) {
-    return App.draw(data.x, data.y, data.type);
+    return App.draw(data.x, data.y, data.type, data.color);
 });
 
 
@@ -55,13 +56,14 @@ cv.live('drag dragstart dragend', function (e) {
     e.offsetX = e.layerX - offset.left;
     e.offsetY = e.layerY - offset.top;
 
-    const type = e.handleObj.type, x = e.offsetX, y = e.layerY;
+    const type = e.handleObj.type, x = e.offsetX, y = e.layerY, color = ownColor;
 
-    App.draw(x, y, type);
+    App.draw(x, y, type, color);
     App.socket.emit('drawClick', {
         x: x,
         y: y,
-        type: type
+        type: type,
+        color: color
     });
 });
 
@@ -69,4 +71,5 @@ $("#colorOptions").live('change', function (e) {
     const selectedColor = $("option:selected", this);
     const color = this.value;
     App.ctx.strokeStyle = color;
+    ownColor = color;
 });

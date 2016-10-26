@@ -3,6 +3,16 @@ body {
     width: 100%;
 }
 
+#navbar {
+    height: 10%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    border: 1px solid red;
+}
+
 #cvContainer {
     height: 90%;
     width: 100%;
@@ -15,4 +25,10 @@ body {
 
 #canvas {
     border: 1px solid black;
+}
+
+#colorOptions {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
