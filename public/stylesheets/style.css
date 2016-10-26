@@ -3,7 +3,7 @@ body {
     width: 100%;
 }
 
-div {
+#cvContainer {
     height: 90%;
     width: 100%;
     position: absolute;
@@ -13,6 +13,6 @@ div {
     border: 2px dashed yellow;
 }
 
-canvas {
+#canvas {
     border: 1px solid black;
 }

@@ -1,5 +1,6 @@
 const socket = io();
 const cv = $("#canvas");
+const colors = ["#000000", "#FFFFFF", "#22B14C", "#FFF200", "#FF7F27", "#ED1C24", "#00A2E8", "#3F48CC", "#A349A4"];
 
 socket.on('test', function (data) {
     console.log(data);
@@ -9,6 +10,11 @@ let App = {};
 
 $(document).ready(function () {
     App.init();
+
+    $.each(colors, function(a) {
+        console.log(colors[a]);
+        $("#colorOptions").append(($("<option>").val(colors[a]).text(colors[a])));
+    });
 });
 
 
@@ -19,7 +25,7 @@ App.init = function () {
     $("#cvContainer").append(App.canvas);
     App.ctx = App.canvas.getContext("2d");
     App.ctx.fillStyle = "solid";
-    App.ctx.strokeStyle = "#bada55";
+    App.ctx.strokeStyle = colors[0];
     App.ctx.lineWidth = 5;
     App.ctx.lineCap = "round";
     App.draw = function (x, y, type) {
@@ -57,4 +63,10 @@ cv.live('drag dragstart dragend', function (e) {
         y: y,
         type: type
     });
+});
+
+$("#colorOptions").live('change', function (e) {
+    const selectedColor = $("option:selected", this);
+    const color = this.value;
+    App.ctx.strokeStyle = color;
 });
