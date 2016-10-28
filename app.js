@@ -43,6 +43,9 @@ io.on('connection', function (socket) {
             color: data.color
         });
     });
+    socket.on('clearCanvas', function() {
+        socket.broadcast.emit('clearCanvas');
+    });
 });
 
 // catch 404 and forward to error handler
