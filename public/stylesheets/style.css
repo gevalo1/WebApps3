@@ -1,37 +1,48 @@
-body {
+html, body, #fullheight {
+    min-height: 100% !important;
     height: 100%;
     width: 100%;
-    
+    margin: 0px;
 }
 
-* {
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;
+#wrapper {
+    height: 100%;
+    width: 100%;
 }
 
 #navbar {
     height: 10%;
     width: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
+    float: left;
     border: 1px solid red;
 }
 
 #cvContainer {
-    height: 90%;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    display: inline-block;
+    height: 85%;
+    width: 94.6%;
+    float: left;
     border: 2px dashed yellow;
 }
 
+#sidebar {
+    display: inline-block;
+    height: 85%;
+    width: 5%;
+    float: left;
+    border: 1px solid aqua;
+}
+
 #canvas {
+
     border: 1px solid black;
+}
+
+#footer {
+    height: 4%;
+    width: 100%;
+    float: left;
+    border: 1px solid blue;
 }
 
 #colorOptions {
@@ -40,4 +51,15 @@ body {
 
 #clearCv {
     float: left;
+}
+
+select, option {
+    padding-bottom: 3em;
+    padding-right: 4.5em;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
 }

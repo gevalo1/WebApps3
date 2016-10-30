@@ -1,8 +1,7 @@
 const socket = io();
-const cv = $("#canvas");
-const colors = ["#000000", "#FFFFFF", "#22B14C", "#FFF200", "#FF7F27", "#ED1C24", "#00A2E8", "#3F48CC", "#A349A4"];
-const colors2 = {Black: "#000000", White: "#FFFFFF", Green: "#22B14C", Yellow: "#FFF200", Orange: "#FF7F27", Red: "#ED1C24", LightBlue: "#00A2E8", blue: "#3F48CC", purple: "#A349A4"};
-let ownColor = colors[0];
+const cv = $('#canvas');
+const colors = {Black: '#000000', White: '#FFFFFF', Green: '#22B14C', Yellow: '#FFF200', Orange: '#FF7F27', Red: '#ED1C24', LightBlue: '#00A2E8', Blue: '#3F48CC', Purple: '#A349A4'};
+let ownColor = colors[0], ownBrushSize = 5;
 
 socket.on('test', function (data) {
     console.log(data);
@@ -10,31 +9,35 @@ socket.on('test', function (data) {
 
 let App = {};
 
-$(document).ready(function () {
+$(window).load(function () {
     App.init();
 
-    $.each(colors2, function(a) {
-        $("#colorOptions").append(($("<option>").val(colors2[a]).text(colors2[a])));//Get name from colors2 as .text
-    });
+    for (var i in colors) {
+        $('#colorOptions').append(($('<option>').val(colors[i]).css({'background-color': colors[i],})));
+    };
+    $('#colorOptions').css({'background-color': colors['Black']});
+
 });
 
 
 App.init = function () {
-    App.canvas = $("<canvas></canvas>", {id: "canvas"})[0];
-    App.canvas.height = $("#cvContainer").height();
-    App.canvas.width = $("#cvContainer").width();
-    $("#cvContainer").append(App.canvas);
-    App.ctx = App.canvas.getContext("2d");
-    App.ctx.fillStyle = "solid";
+    App.canvas = $("<canvas></canvas>", {id: 'canvas'})[0];
+    App.canvas.height = $('#cvContainer').height();
+    App.canvas.width = $('#cvContainer').width();
+    //App.canvas.width = window.innerWidth;
+    $('#cvContainer').append(App.canvas);
+    App.ctx = App.canvas.getContext('2d');
+    App.ctx.fillStyle = 'solid';
     App.ctx.strokeStyle = colors[0];
     App.ctx.lineWidth = 5;
-    App.ctx.lineCap = "round";
-    App.draw = function (x, y, type, color) {
+    App.ctx.lineCap = 'round';
+    App.draw = function (x, y, type, brushSize, color) {
+        App.ctx.lineWidth = brushSize;
         App.ctx.strokeStyle = color;
-        if (type === "dragstart") {
+        if (type === 'dragstart') {
             App.ctx.beginPath();
             return App.ctx.moveTo(x, y);
-        } else if (type === "drag") {
+        } else if (type === 'drag') {
             App.ctx.lineTo(x, y);
             return App.ctx.stroke();
         } else {
@@ -50,7 +53,7 @@ App.init = function () {
 App.socket = io.connect();
 
 App.socket.on('draw', function (data) {
-    return App.draw(data.x, data.y, data.type, data.color);
+    return App.draw(data.x, data.y, data.type, data.brushSize, data.color);
 });
 
 App.socket.on('clearCanvas', function () {
@@ -64,30 +67,40 @@ cv.live('drag dragstart dragend', function (e) {
     e.offsetX = e.layerX - offset.left;
     e.offsetY = e.layerY - offset.top;
 
-    const type = e.handleObj.type, x = e.offsetX, y = e.layerY, color = ownColor;
+    const type = e.handleObj.type, x = e.offsetX, y = e.layerY, color = ownColor, brushSize = ownBrushSize;
 
-    App.draw(x, y, type, color);
+    App.draw(x, y, type, brushSize, color);
     App.socket.emit('drawClick', {
         x: x,
         y: y,
         type: type,
+        brushSize: brushSize,
         color: color
     });
 });
 
-$("#colorOptions").live('change', function (e) {
-    const selectedColor = $("option:selected", this);
+$('#colorOptions').live('change', function (e) {
+    const selectedColor = $('option:selected', this);
     const color = this.value;
     App.ctx.strokeStyle = color;
     ownColor = color;
+    
+    $('#colorOptions').css('background-color', color);
 });
 
-$("#clearCv").click(function (e) {
-    const answer = prompt("Enter the password for clearing the canvas.");
+$('#clearCv').click(function (e) {
+    const answer = prompt('Enter the password for clearing the canvas.');
     
-    if (answer === "password") { //Will be changed later on
+    if (answer === 'password') { //Will be changed later on
         App.clear();
         
         App.socket.emit('clearCanvas');
     }
+});
+
+$('#changeBrushSize').click(function (e) {
+    const answer = prompt('Enter brush size.');
+    
+    App.ctx.lineWidth = answer;
+    ownBrushSize = answer;
 });
