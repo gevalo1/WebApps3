@@ -13,8 +13,9 @@ $(window).load(function () {
     App.init();
 
     for (var i in colors) {
-        $('#colorOptions').append(($('<option>').val(colors[i]).css({'background-color': colors[i],})));
-    };
+        $('#colorOptions').append(($('<option>').val(colors[i]).css({'background-color': colors[i], })));
+    }
+    ;
     $('#colorOptions').css({'background-color': colors['Black']});
 
 });
@@ -44,7 +45,7 @@ App.init = function () {
             return App.ctx.closePath();
         }
     };
-    App.clear = function() {
+    App.clear = function () {
         App.ctx.clearRect(0, 0, App.canvas.width, App.canvas.height);
     };
 };
@@ -63,7 +64,7 @@ App.socket.on('clearCanvas', function () {
 
 cv.live('drag dragstart dragend', function (e) {
     const offset = $(this).offset();
-    
+
     e.offsetX = e.layerX - offset.left;
     e.offsetY = e.layerY - offset.top;
 
@@ -84,23 +85,23 @@ $('#colorOptions').live('change', function (e) {
     const color = this.value;
     App.ctx.strokeStyle = color;
     ownColor = color;
-    
+
     $('#colorOptions').css('background-color', color);
 });
 
 $('#clearCv').click(function (e) {
     const answer = prompt('Enter the password for clearing the canvas.');
-    
+
     if (answer === 'password') { //Will be changed later on
         App.clear();
-        
+
         App.socket.emit('clearCanvas');
     }
 });
 
 $('#changeBrushSize').click(function (e) {
     const answer = prompt('Enter brush size.');
-    
+
     App.ctx.lineWidth = answer;
     ownBrushSize = answer;
 });

@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 const io = require('socket.io').listen(server);
 
-app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 server.listen(8085, function () {
@@ -27,11 +27,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static('./views/'));
+//app.use('/*', express.static('./views/index.ejs'));
 
 app.use('/', routes);
 app.use('/users', users);
-
 
 
 io.on('connection', function (socket) {
