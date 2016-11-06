@@ -16,7 +16,7 @@ const io = require('socket.io').listen(server);
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-server.listen(8085, function () {
+server.listen(8080, function () {
     console.log('App listening at http://localhost:8085');
 });
 
@@ -43,7 +43,9 @@ io.on('connection', function (socket) {
             y: data.y,
             type: data.type,
             brushSize: data.brushSize,
-            color: data.color
+            color: data.color,
+            prevx: data.prevx,
+            prevy: data.prevy
         });
     });
     socket.on('clearCanvas', function () {

@@ -39,10 +39,10 @@ gulp.task('default', ['build', 'browser-sync'], function () {
 
 gulp.task('browser-sync', ['nodemon'], function () {
     browserSync.init(['./build/**.**'], {
-        port: 8080,
+        port: 8085,
         serveStatic: ['./build/'],
         proxy: {
-            target: 'localhost:8085', // original port
+            target: 'localhost:8080', // original port
             ws: true // enables websockets
         }
     });
@@ -91,7 +91,7 @@ gulp.task('css', function () {
             .pipe(minifyCSS())
             .pipe(concat('style.css'))
             .on('error', interceptErrors)
-            .pipe(gulp.dest('./build'))
+            .pipe(gulp.dest('./build'));
 });
 
 gulp.task('html', function () {
