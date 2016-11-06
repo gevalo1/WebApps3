@@ -16,7 +16,7 @@ const io = require('socket.io').listen(server);
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-server.listen(8080, function () {
+server.listen(8080, () => {
     console.log('App listening at http://localhost:8085');
 });
 
@@ -35,9 +35,9 @@ app.use('/', routes);
 app.use('/users', users);
 
 
-io.on('connection', function (socket) {
+io.on('connection', (socket) => {
     socket.emit('test', 'Connectedddd');
-    socket.on('drawClick', function (data) {
+    socket.on('drawClick', (data) => {
         socket.broadcast.emit('draw', {
             x: data.x,
             y: data.y,
@@ -48,13 +48,13 @@ io.on('connection', function (socket) {
             prevy: data.prevy
         });
     });
-    socket.on('clearCanvas', function () {
+    socket.on('clearCanvas', () => {
         socket.broadcast.emit('clearCanvas');
     });
 });
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     let err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -65,7 +65,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -76,7 +76,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
