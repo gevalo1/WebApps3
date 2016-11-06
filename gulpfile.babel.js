@@ -39,10 +39,10 @@ gulp.task('default', ['build', 'browser-sync'], function () {
 
 gulp.task('browser-sync', ['nodemon'], function () {
     browserSync.init(['./build/**.**'], {
-        port: 8085,
+        port: 8080,
         serveStatic: ['./build/'],
         proxy: {
-            target: 'localhost:8080', // original port
+            target: 'localhost:8085', // original port
             ws: true // enables websockets
         }
     });
@@ -106,7 +106,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('clean', () => {
-    del(['./build/**', '!./build', '!./build/jquery-1.6.2.min.js', '!./build/jquery.event.drag-2.0.js', '!./build/socket.io.js']).then(paths => {
+    del(['./build/**', '!./build', '!./build/jquery-3.1.1.min.js']).then(paths => {
         console.log('Deleted files and folders:\n', paths.join('\n'));
     });
 });

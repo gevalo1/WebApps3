@@ -21,7 +21,7 @@ socket.on('test', (data) => {
 
 let App = {};
 
-$(window).load(() => {
+$(window).on('load', () => {
     App.init();
 
     for (let color in colors) {
@@ -130,7 +130,7 @@ App.socket.on('clearCanvas', () => {
 });
 
 
-$('#colorOptions').live('change', (e) => {
+$('#navbar').on('change', '#colorOptions', (e) => {
     const selectedColor = $('option:selected');
     const color = selectedColor[0].style.backgroundColor;
     App.ctx.strokeStyle = color;
