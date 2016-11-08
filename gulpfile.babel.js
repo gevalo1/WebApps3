@@ -40,7 +40,6 @@ gulp.task('default', ['build', 'browser-sync'], function () {
 gulp.task('browser-sync', ['nodemon'], function () {
     browserSync.init(['./build/**.**'], {
         port: 8080,
-        serveStatic: ['./build/'],
         proxy: {
             target: 'localhost:8085', // original port
             ws: true // enables websockets

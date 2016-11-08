@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static('./views/'));
-//app.use('/*', express.static('./views/index.ejs'));
+app.use(express.static('./build/'));
+//app.use('/*', express.static('./build/index.html'));
 
 app.use('/', routes);
 app.use('/users', users);
@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    let err = new Error('Not Found');
+    let err = new Error('Not Found: ' + req.originalUrl);
     err.status = 404;
     next(err);
 });
