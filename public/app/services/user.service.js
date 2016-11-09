@@ -14,7 +14,7 @@ export default class User {
 	attemptAuth(type, credentials) {
 		let route = (type === 'login') ? '/login' : '';
 		return this._$http({
-			url: this._AppConstants.api + '/users' + route,
+			url: this._AppConstants.api + '/users' + route, //TO BE CHANGED
 			method: 'POST',
 			data: {
 				user: credentials
@@ -47,7 +47,7 @@ export default class User {
 			deferred.resolve(true);
 		} else {
 			this._$http({
-				url: this._AppConstants.api + '/user',
+				url: this._AppConstants.api + '/user', //TO BE CHANGED
 				method: 'GET',
 			}).then(
 				(res) => {
@@ -79,7 +79,7 @@ export default class User {
 	
 	update(fields) {
 		return this._$http({
-			url: this._AppConstants.api + '/user',
+			url: this._AppConstants.api + '/user', //TO BE CHANGED
 			method: 'PUT',
 			data: { user: fields }
 		}).then(

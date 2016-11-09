@@ -10,17 +10,17 @@ import './config/app.templates';
 // Import our app functionaity
 import './components';
 import './services';
+import './home';
 import './auth';
 
-
-// Create and bootstrap application
 const requires = [
+    'ui.router',
     'app.components',
     'app.services',
-    'app.auth',
+    'app.home',
+    'app.auth'
 ];
 
-// Mount on window for testing
 window.app = angular.module('app', requires);
 
 angular.module('app').constant('AppConstants', constants);

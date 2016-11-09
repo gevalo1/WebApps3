@@ -13,8 +13,27 @@ const app = express();
 const server = http.createServer(app);
 const io = require('socket.io').listen(server);
 
+const Middlewares = require('./server/api/config/middlewares/base/MiddlewaresBase');
+
+const mongoose = require('mongoose'),
+    db = mongoose.connection,
+    User = require('./server/models/user');
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/draw');
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    console.log('Connected to DB');
+});
+
+
+
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use('/auth', (req, res) => {
+    Middlewares.configuration; //Niet af...
+});
 
 server.listen(8085, () => {
     console.log('App listening at http://localhost:8085');
@@ -28,11 +47,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('./build/'));
-//app.use('/*', express.static('./build/index.html'));
 
-app.use('/', routes);
-app.use('/users', users);
+//app.use(express.static('./build/'));
+//app.use('/*', express.static('./build/index.html')); //Always keep as last route
+app.use('/js', express.static(__dirname + 'build/'));
+app.use('/css', express.static(__dirname + 'build/'));
+app.get('/*', function (req, res) {
+    res.sendFile(__dirname + '/build/index.html');
+});
 
 
 io.on('connection', (socket) => {

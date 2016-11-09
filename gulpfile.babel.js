@@ -16,10 +16,10 @@ import concat from 'gulp-concat';
 import minifyCSS from 'gulp-minify-css';
 
 // Where our files are located
-var jsFiles = "public/assets/javascripts/*.js";
-var viewFiles = "views/*.ejs";
+var jsFiles   = "public/app/**/*.js";
+var viewFiles = "public/app/**/*.html";
 
-var interceptErrors = function (error) {
+var interceptErrors = (error) => {
     var args = Array.prototype.slice.call(arguments);
 
     // Send error to notification center with gulp-notify
@@ -32,12 +32,12 @@ var interceptErrors = function (error) {
     this.emit('end');
 };
 
-gulp.task('default', ['build', 'browser-sync'], function () {
+gulp.task('default', ['build', 'browser-sync'], () => {
     gulp.watch(['./views/**.**', './public/**/*'], ['build']);
     gulp.watch('./build/', browserSync.reload());
 });
 
-gulp.task('browser-sync', ['nodemon'], function () {
+gulp.task('browser-sync', () => {
     browserSync.init(['./build/**.**'], {
         port: 8080,
         proxy: {
@@ -48,16 +48,16 @@ gulp.task('browser-sync', ['nodemon'], function () {
 });
 
 gulp.task('nodemon', (cb) => {
-    var started = false;
+    /*var started = false;
 
     return nodemon({
-        script: 'app.js'
+        script: 'node run dev'
     }).on('start', function () {
         if (!started) {
             cb();
             started = true;
         }
-    });
+    });*/
 });
 
 gulp.task('build', ['browserify', 'css'], () => {
@@ -65,8 +65,8 @@ gulp.task('build', ['browserify', 'css'], () => {
     //gulp.start() will have to be replaced by gulp.series() when gulp 4.0 is released.
 });
 
-gulp.task('browserify', ['views'], function () {
-    return browserify(['./public/assets/javascripts/main.js'])
+gulp.task('browserify', ['views'], () => {
+    return browserify(['./public/assets/javascripts/main.js', './public/app/app.js'])
             .transform(babelify, {presets: ["es2015"]})
             .transform(ngAnnotate)
             .bundle()
@@ -75,7 +75,7 @@ gulp.task('browserify', ['views'], function () {
             .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('views', function () {
+/*gulp.task('views', () => {
     return gulp.src(viewFiles)
             .pipe(templateCache({
                 standalone: true
@@ -83,9 +83,9 @@ gulp.task('views', function () {
             .on('error', interceptErrors)
             .pipe(rename("app.templates.js"))
             .pipe(gulp.dest('./public/config/'));
-});
+});*/
 
-gulp.task('css', function () {
+gulp.task('css', () => {
     gulp.src('./public/assets/stylesheets/*.css')
             .pipe(minifyCSS())
             .pipe(concat('style.css'))
@@ -93,7 +93,7 @@ gulp.task('css', function () {
             .pipe(gulp.dest('./build'));
 });
 
-gulp.task('html', function () {
+gulp.task('html', () => {
     return gulp.src("./views/index.ejs")
             .pipe(ejs({}, {ext: '.html'}))
             .pipe(htmlreplace({
@@ -102,6 +102,16 @@ gulp.task('html', function () {
             }))
             .on('error', interceptErrors)
             .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('views', () => {
+  return gulp.src(viewFiles)
+      .pipe(templateCache({
+        standalone: true
+      }))
+      .on('error', interceptErrors)
+      .pipe(rename("./public/app/config/app.templates.js"))
+      .pipe(gulp.dest('./src/js/config/'));
 });
 
 gulp.task('clean', () => {
