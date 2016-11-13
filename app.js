@@ -31,7 +31,6 @@ server.listen(8085, () => {
     console.log('App listening at http://localhost:8085');
 });
 
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -40,14 +39,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use(express.static('./build/'));
-//app.use('/*', express.static('./build/index.html')); //Always keep as last route
-//app.use('/', express.static(__dirname + '/build'));
-/*app.use('/*', function (req, res) {
-    console.log("AllRouter");
-    res.sendFile(__dirname + '/build/index.html');
-});
-*/
+//Production
+app.use(express.static('./build/'));
 
 io.on('connection', (socket) => {
     socket.emit('test', 'Connectedddd');

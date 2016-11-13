@@ -3,7 +3,6 @@ function AppRun(AppConstants, $rootScope) {
 
   // change page title based on state
   $rootScope.$on('$stateChangeSuccess', (event, toState) => {
-	  console.log(toState);
     $rootScope.setPageTitle(toState.title);
   });
 

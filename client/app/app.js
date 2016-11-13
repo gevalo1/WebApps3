@@ -14,9 +14,10 @@ import './home';
 import './services'
 import './auth';
 import './canvas';
-import './normalize.css';
-import './style.css';
 import 'angular-material';
+//development
+//import './normalize.css';
+//import './style.css';
 
 // Create and bootstrap application
 const requires = [
