@@ -1,19 +1,15 @@
 'use strict';
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+//const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const routes = require('./routes/index');
-const users = require('./routes/users');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const io = require('socket.io').listen(server);
-
-const Middlewares = require('./server/api/config/middlewares/base/MiddlewaresBase');
 
 const mongoose = require('mongoose'),
     db = mongoose.connection,
@@ -31,10 +27,6 @@ db.once('open', function () {
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use('/auth', (req, res) => {
-    Middlewares.configuration; //Niet af...
-});
-
 server.listen(8085, () => {
     console.log('App listening at http://localhost:8085');
 });
@@ -50,12 +42,12 @@ app.use(cookieParser());
 
 //app.use(express.static('./build/'));
 //app.use('/*', express.static('./build/index.html')); //Always keep as last route
-app.use('/js', express.static(__dirname + 'build/'));
-app.use('/css', express.static(__dirname + 'build/'));
-app.get('/*', function (req, res) {
+//app.use('/', express.static(__dirname + '/build'));
+/*app.use('/*', function (req, res) {
+    console.log("AllRouter");
     res.sendFile(__dirname + '/build/index.html');
 });
-
+*/
 
 io.on('connection', (socket) => {
     socket.emit('test', 'Connectedddd');

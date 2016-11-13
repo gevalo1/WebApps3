@@ -1,0 +1,137 @@
+html, body, #fullheight {
+    min-height: 100% !important;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+	overflow: hidden;
+}
+
+h1 {
+	margin: 0 !important;
+}
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+	background-color: #575252;
+}
+
+#navbar {
+    height:10%;
+    width: 100%;
+    float: left;
+    //border: 1px solid red;
+	background-color: #575252;
+}
+
+#content {
+    max-width: 100%;
+    width: 100%;
+    height: 85%;
+    float: left;
+    //border: 1px solid green;
+}
+
+.ng-scope {
+	height: 100%;
+}
+
+#cvContainer {
+    height: 100%;
+    width: 95%;
+    float: left;
+    //border: 2px dashed yellow;
+}
+
+#sidebar {
+    height: 100%;
+    width: auto;
+    //border: 1px solid aqua;
+    overflow: hidden;
+    text-align: center;
+	background-color: #575252;
+}
+
+#canvas {
+    //border: 1px solid black;
+	background-color: #E2E2E2;
+	position: absolute;
+}
+
+#footer {
+    height: 4%;
+    width: 100%;
+    float: left;
+    //border: 1px solid blue;
+	background-color: #575252;
+}
+
+select, option {
+    padding-bottom: 3em;
+    padding-right: 4.5em;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+button#changeBrushSize, button#clearCv, button#colorOptions {
+	background-color: gray !important;
+	font-size: 35px;
+	color: #575252 !important;
+}
+
+#footerText {
+	color: #CBCACA;
+	text-align: center;
+}
+
+#colorList {
+	width: 50px;
+	height: auto;
+	background-color: gray;
+	z-index: 2;
+	display: none;
+	position: absolute;
+	top: 5px;
+	left: 10vh;
+}
+
+#black {
+	background-color: #000000;
+}
+#white {
+	background-color: #FFFFFF;
+}
+#green {
+	background-color: #22B14C;
+}
+#yellow {
+	background-color: #FFF200;
+}
+#orange {
+	background-color: #FF7F27;
+}
+#red {
+	background-color: #ED1C24;
+}
+#lightBlue {
+	background-color: #00A2E8;
+}
+#blue {
+	background-color: #3F48CC;
+}
+#purple {
+	background-color: #A349A4;
+}
+
+.color {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.color:not(:first-child) {
+	margin-top: 3px;
+}

@@ -1,23 +1,24 @@
 'use strict';
-import gulp from 'gulp';
-import nodemon from 'gulp-nodemon';
-import browserSync from 'browser-sync';
-import del from 'del';
-import source from 'vinyl-source-stream';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import ngAnnotate from 'browserify-ngannotate';
-import templateCache from 'gulp-angular-templatecache';
-import rename from 'gulp-rename';
-import notify from 'gulp-notify';
-import ejs from 'gulp-ejs';
-import htmlreplace from 'gulp-html-replace';
-import concat from 'gulp-concat';
-import minifyCSS from 'gulp-minify-css';
 
-// Where our files are located
-var jsFiles   = "public/app/**/*.js";
-var viewFiles = "public/app/**/*.html";
+import gulp     from 'gulp';
+import webpack  from 'webpack';
+import path     from 'path';
+import sync     from 'run-sequence';
+import rename   from 'gulp-rename';
+import template from 'gulp-template';
+import fs       from 'fs';
+import yargs    from 'yargs';
+import lodash   from 'lodash';
+import gutil    from 'gulp-util';
+import serve    from 'browser-sync';
+import del      from 'del';
+import notify from 'gulp-notify';
+import templateCache from 'gulp-angular-templatecache';
+import nodemon from 'gulp-nodemon';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import colorsSupported      from 'supports-color';
+import historyApiFallback   from 'connect-history-api-fallback';
 
 var interceptErrors = (error) => {
     var args = Array.prototype.slice.call(arguments);
@@ -32,76 +33,114 @@ var interceptErrors = (error) => {
     this.emit('end');
 };
 
-gulp.task('default', ['build', 'browser-sync'], () => {
-    gulp.watch(['./views/**.**', './public/**/*'], ['build']);
-    gulp.watch('./build/', browserSync.reload());
+let root = 'client';
+var viewFiles = "client/app/**/*.html";
+
+// helper method for resolving paths
+let resolveToApp = (glob = '') => {
+  return path.join(root, 'app', glob); // app/{glob}
+};
+
+let resolveToComponents = (glob = '') => {
+  return path.join(root, 'app/components', glob); // app/components/{glob}
+};
+
+// map of all paths
+let paths = {
+  js: resolveToComponents('**/*!(.spec.js).js'), // exclude spec files
+  scss: resolveToApp('**/*.scss'), //stylesheets
+  html: [
+    resolveToApp('**/*.html'),
+    path.join(root, 'index.html')
+  ],
+  entry: [
+    'babel-polyfill',
+    path.join(__dirname, root, 'app/app.js')
+  ],
+  output: root,
+  blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
+  dest: path.join(__dirname, 'dist')
+};
+
+gulp.task('webpack', ['clean'], (cb) => {
+  const config = require('./webpack.dist.config');
+  config.entry.app = paths.entry;
+
+  webpack(config, (err, stats) => {
+    if(err)  {
+      throw new gutil.PluginError("webpack", err);
+    }
+
+    gutil.log("[webpack]", stats.toString({
+      colors: colorsSupported,
+      chunks: false,
+      errorDetails: true
+    }));
+
+    cb();
+  });
 });
 
-gulp.task('browser-sync', () => {
-    browserSync.init(['./build/**.**'], {
-        port: 8080,
-        proxy: {
+gulp.task('serve', ['nodemon'], () => {
+  const config = require('./webpack.dev.config');
+  config.entry.app = [
+    'webpack-hot-middleware/client?reload=true',
+  ].concat(paths.entry);
+
+  var compiler = webpack(config);
+
+  serve({
+    port: process.env.PORT || 8080,
+    open: false,
+    proxy: {
             target: 'localhost:8085', // original port
             ws: true // enables websockets
-        }
-    });
+        },
+    middleware: [
+      historyApiFallback(),
+      webpackDevMiddleware(compiler, {
+        stats: {
+          colors: colorsSupported,
+          chunks: false,
+          modules: false
+        },
+        publicPath: config.output.publicPath
+      }),
+      webpackHotMiddleware(compiler)
+    ]
+  });
 });
 
 gulp.task('nodemon', (cb) => {
-    /*var started = false;
+    var started = false;
 
     return nodemon({
-        script: 'node run dev'
+        script: 'app.js'
     }).on('start', function () {
         if (!started) {
             cb();
             started = true;
         }
-    });*/
+    });
 });
 
-gulp.task('build', ['browserify', 'css'], () => {
-    gulp.start('html');
-    //gulp.start() will have to be replaced by gulp.series() when gulp 4.0 is released.
-});
+gulp.task('component', () => {
+  const cap = (val) => {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+  };
+  const name = yargs.argv.name;
+  const parentPath = yargs.argv.parent || '';
+  const destPath = path.join(resolveToComponents(), parentPath, name);
 
-gulp.task('browserify', ['views'], () => {
-    return browserify(['./public/assets/javascripts/main.js', './public/app/app.js'])
-            .transform(babelify, {presets: ["es2015"]})
-            .transform(ngAnnotate)
-            .bundle()
-            .on('error', interceptErrors)
-            .pipe(source('main.js'))
-            .pipe(gulp.dest('./build/'));
-});
-
-/*gulp.task('views', () => {
-    return gulp.src(viewFiles)
-            .pipe(templateCache({
-                standalone: true
-            }))
-            .on('error', interceptErrors)
-            .pipe(rename("app.templates.js"))
-            .pipe(gulp.dest('./public/config/'));
-});*/
-
-gulp.task('css', () => {
-    gulp.src('./public/assets/stylesheets/*.css')
-            .pipe(minifyCSS())
-            .pipe(concat('style.css'))
-            .on('error', interceptErrors)
-            .pipe(gulp.dest('./build'));
-});
-
-gulp.task('html', () => {
-    return gulp.src("./views/index.ejs")
-            .pipe(ejs({}, {ext: '.html'}))
-            .pipe(htmlreplace({
-                css: 'style.css',
-                js: 'main.js'
-            }))
-            .on('error', interceptErrors)
-            .pipe(gulp.dest('./build/'));
+  return gulp.src(paths.blankTemplates)
+    .pipe(template({
+      name: name,
+      upCaseName: cap(name)
+    }))
+    .pipe(rename((path) => {
+      path.basename = path.basename.replace('temp', name);
+    }))
+    .pipe(gulp.dest(destPath));
 });
 
 gulp.task('views', () => {
@@ -109,13 +148,16 @@ gulp.task('views', () => {
       .pipe(templateCache({
         standalone: true
       }))
-      .on('error', interceptErrors)
-      .pipe(rename("./public/app/config/app.templates.js"))
-      .pipe(gulp.dest('./src/js/config/'));
+	  .on('error', interceptErrors)
+      .pipe(rename("app.templates.js"))
+      .pipe(gulp.dest('./client/app/config/'));
 });
 
-gulp.task('clean', () => {
-    del(['./build/**', '!./build', '!./build/jquery-3.1.1.min.js']).then(paths => {
-        console.log('Deleted files and folders:\n', paths.join('\n'));
-    });
+gulp.task('clean', (cb) => {
+  del([paths.dest]).then(function (paths) {
+    gutil.log("[clean]", paths);
+    cb();
+  })
 });
+
+gulp.task('default', ['serve']);

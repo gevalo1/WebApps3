@@ -1,0 +1,47 @@
+<div class="auth-page">
+    <div class="row">
+
+        <h1 class="auth-title" ng-bind="::$ctrl.title"></h1>
+        <p>
+          <a ui-sref="app.login" ng-show="$ctrl.authType === 'register'">
+            Have an account?
+          </a>
+		  <a ui-sref="app.register" ng-show="$ctrl.authType === 'login'">
+            Need an account?
+          </a>
+        </p>
+		
+		<list-errors errors="$ctrl.errors"></list-errors>
+
+        <form ng-submit="$ctrl.submitForm()">
+          <fieldset ng-disabled="$ctrl.isSubmitting">
+
+            <fieldset ng-show="$ctrl.authType === 'register'">
+              <input class="auth-input"
+                type="text"
+                placeholder="Username"
+                ng-model="$ctrl.formData.username" />
+            </fieldset>
+
+            <fieldset>
+              <input class="auth-input"
+                type="email"
+                placeholder="Email"
+                ng-model="$ctrl.formData.email" />
+            </fieldset>
+
+            <fieldset>
+              <input class="auth-input"
+                type="password"
+                placeholder="Password"
+                ng-model="$ctrl.formData.password" />
+            </fieldset>
+
+            <button class="auth-button"
+              type="submit" ng-bind="$ctrl.title">
+            </button>
+
+          </fieldset>
+        </form>
+  </div>
+</div>
