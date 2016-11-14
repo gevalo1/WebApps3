@@ -26,7 +26,7 @@ module.exports.handle =
 					req.body.user = result.local;
 					res.json(req.body);
 				} else {
-					res.sendStatus(401);
+					res.status(500).send("Email or password is invalid.");
 				}
 			});
 		};
@@ -38,7 +38,7 @@ module.exports.handle =
 					req.body.user = result.local;
 					res.json(req.body);
 				} else {
-					res.sendStatus(401);
+					res.sendStatus(500);
 				}
 			});
 		};
@@ -48,21 +48,27 @@ module.exports.handle =
 			const payload = req.body.user.username + currentDate;
 			req.body.user.token = jwt.sign(payload , "EvilWhaleDrawingD1ng");
 		
-			User.findOne({$or: [{'local.username': req.body.user.username}, {'local.email': req.body.user.email}]}).exec(function (err, result) {
+			User.findOne({'local.username': req.body.user.username}).exec(function (err, result) {
 				if (!result) {
-					result = new User({
-						local: {
-							email: req.body.user.email,
-							password: req.body.user.password,
-							username: req.body.user.username,
-							joinDate: currentDate,
-							token: req.body.user.token
+					User.findOne({'local.email': req.body.user.email}).exec(function (err, result) {
+						if (!result) {
+							result = new User({
+								local: {
+									email: req.body.user.email,
+									password: req.body.user.password,
+									username: req.body.user.username,
+									joinDate: currentDate,
+									token: req.body.user.token
+								}
+							});
+							result.save();
+							res.json(req.body);
+						} else {
+							res.status(500).send("Email is already in use.");
 						}
 					});
-					result.save();
-					res.json(req.body);
 				} else {
-					res.sendStatus(500);
+					res.status(500).send("Username is already in use.");
 				}
 			});
 		};

@@ -11,7 +11,7 @@
           </a>
         </p>
 		
-		<list-errors errors="$ctrl.errors"></list-errors>
+		<p class="auth-error">{{$ctrl.errors}}</p>
 
 			<form name="authForm" novalidate ng-submit="$ctrl.submitForm()">
 			  <fieldset ng-disabled="$ctrl.isSubmitting">

@@ -1,6 +1,6 @@
 const AppConstants = {
-  api: 'http://localhost:8085/api',
-  //api: 'https://conduit.productionready.io/api',
+  //api: 'http://localhost:8085/api', //Development
+  api: 'https://webapps.evilwhale.nl/api', //Production
   jwtKey: 'jwtToken',
   appName: 'Draw',
 };
