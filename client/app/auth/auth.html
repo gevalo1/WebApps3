@@ -13,35 +13,27 @@
 		
 		<list-errors errors="$ctrl.errors"></list-errors>
 
-        <form ng-submit="$ctrl.submitForm()">
-          <fieldset ng-disabled="$ctrl.isSubmitting">
+			<form name="authForm" novalidate ng-submit="$ctrl.submitForm()">
+			  <fieldset ng-disabled="$ctrl.isSubmitting">
 
-            <fieldset ng-show="$ctrl.authType === 'register'">
-              <input class="auth-input"
-                type="text"
-                placeholder="Username"
-                ng-model="$ctrl.formData.username" />
-            </fieldset>
+				  <input class="auth-input"
+					type="text"
+					placeholder="Username"
+					ng-model="$ctrl.formData.username"
+					ng-pattern="/^([A-Za-z0-9\-\_]{3,16}$)+$/" ng-required="$ctrl.authType === 'register'" ng-show="$ctrl.authType === 'register'"/>
 
-            <fieldset>
-              <input class="auth-input"
-                type="email"
-                placeholder="Email"
-                ng-model="$ctrl.formData.email" />
-            </fieldset>
+				  <input class="auth-input"
+					type="email"
+					placeholder="Email"
+					ng-model="$ctrl.formData.email" required/>
 
-            <fieldset>
-              <input class="auth-input"
-                type="password"
-                placeholder="Password"
-                ng-model="$ctrl.formData.password" />
-            </fieldset>
+				  <input class="auth-input"
+					type="password"
+					placeholder="Password"
+					ng-model="$ctrl.formData.password" required/>
 
-            <button class="auth-button"
-              type="submit" ng-bind="$ctrl.title">
-            </button>
-
-          </fieldset>
-        </form>
+				<md-button class="auth-button" type="submit" ng-bind="$ctrl.title" ng-disabled="authForm.$invalid" aria-label="auth"/>
+			  </fieldset>
+			</form>
   </div>
 </div>

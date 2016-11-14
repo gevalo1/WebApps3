@@ -7,10 +7,10 @@ module.exports.handle =
 		const target = getUrlName(req.url);
         switch (target) {
             case 'login':
-                handleLogin(req, res)
+				handleLogin(req, res)
                 break;
             case 'user':
-                handleUser(req, res)
+				handleUser(req, res)
                 break;
             case 'signup':
 				handleSignup(req, res)
@@ -71,7 +71,5 @@ module.exports.handle =
             url = url.split('/');
             url = (url[url.length - 1]);
             return url;
-        };
-        
-        
+        }; 
 	};

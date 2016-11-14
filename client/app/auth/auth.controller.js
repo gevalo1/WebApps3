@@ -7,6 +7,7 @@ class AuthCtrl {
 		
 		this.title = $state.current.title;
 		this.authType = $state.current.name.replace('app.', '');
+		
 	}
 	
 	submitForm() {
@@ -19,11 +20,11 @@ class AuthCtrl {
 			},
 			(err) => {
 				this.isSubmitting = false;
-				console.log(err);
-				//this.errors = err.data.errors;
+				this.errors = err.data.errors;
 			}
 		);
 	}
+
 }
 
 export default AuthCtrl;

@@ -1,3 +1,5 @@
+import { createHash } from 'crypto';
+
 export default class User {
 	constructor(JWT, AppConstants, $http, $state, $q) {
 		'ngInject';
@@ -12,12 +14,14 @@ export default class User {
 	}
 
 	attemptAuth(type, credentials) {
+		const userData = angular.copy(credentials);
+		userData.password = createHash('sha256').update(userData.password).digest('hex');
 		let route = (type === 'login') ? '/login' : '/signup';
 		return this._$http({
 			url: this._AppConstants.api + route,
 			method: 'POST',
 			data: {
-				user: credentials
+				user: userData
 			}
 		}).then(
 			(res) => {

@@ -7,7 +7,7 @@ class HomeCtrl {
 	this._User = User;
 	
 	this.logout = User.logout.bind(User);
-	
+	this.authed = (User.current != null);
   }
 
 }
