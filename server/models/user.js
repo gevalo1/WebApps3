@@ -8,12 +8,8 @@ let userSchema = mongoose.Schema({
         email: { type : String , unique : true, required : true },
         password: { type : String , unique : false, required : true },
         username: { type : String , unique : true, required : true },
-        joinDate: Date
-    },
-    status: {
-        online: {type: Boolean, default: false},
-        room: String,
-        lastOnline: Date
+        joinDate: Date,
+		token: String
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date

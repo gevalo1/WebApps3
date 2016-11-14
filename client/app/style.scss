@@ -1,0 +1,124 @@
+$mainColor: #575252;
+$container-width: 100%;
+$container-height: 100%;
+
+html, body, #fullheight {
+    min-height: $container-height !important;
+    height: $container-height;
+    width: $container-width;
+    margin: 0px;
+	overflow: hidden;
+}
+
+h1 {
+	margin: 0 !important;
+}
+
+#wrapper {
+    height: $container-height;
+    width: $container-width;
+	background-color: $mainColor;
+}
+
+#navbar {
+    height: $container-height / 10;
+    width: $container-width;
+    float: left;
+	background-color: $mainColor;
+}	
+
+#content {
+    max-width: $container-width;
+    width: $container-width;
+    height: $container-height - 15%;
+    float: left;
+}
+
+.ng-scope {
+	height: $container-height;
+}
+
+#cvContainer {
+    height: $container-height;
+    width: $container-width - 5%;
+    float: left;
+}
+
+#sidebar {
+    height: $container-height;
+    width: auto;
+    overflow: hidden;
+    text-align: center;
+	background-color: $mainColor;
+}
+
+#canvas {
+	background-color: #E2E2E2;
+	position: absolute;
+}
+
+#footer {
+    height: $container-height / 25;
+    width: $container-width;
+    float: left;
+	background-color: $mainColor;
+}
+
+button#changeBrushSize, button#clearCv, button#colorOptions {
+	background-color: gray !important;
+	font-size: 35px;
+	color: $mainColor !important;
+}
+
+#footerText {
+	color: #CBCACA;
+	text-align: center;
+}
+
+#colorList {
+	width: 50px;
+	height: auto;
+	background-color: gray;
+	z-index: 2;
+	display: none;
+	position: absolute;
+	top: 5px;
+	left: 10vh;
+}
+
+#black {
+	background-color: #000000;
+}
+#white {
+	background-color: #FFFFFF;
+}
+#green {
+	background-color: #22B14C;
+}
+#yellow {
+	background-color: #FFF200;
+}
+#orange {
+	background-color: #FF7F27;
+}
+#red {
+	background-color: #ED1C24;
+}
+#lightBlue {
+	background-color: #00A2E8;
+}
+#blue {
+	background-color: #3F48CC;
+}
+#purple {
+	background-color: #A349A4;
+}
+
+.color {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.color:not(:first-child) {
+	margin-top: 3px;
+}

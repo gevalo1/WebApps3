@@ -5,6 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const http = require('http');
 const app = express();
@@ -22,6 +23,7 @@ db.once('open', function () {
     console.log('Connected to DB');
 });
 
+app.use(cors());
 
 
 //app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +43,8 @@ app.use(cookieParser());
 
 //Production
 app.use(express.static('./build/'));
+
+require('./server/routes')(app);
 
 io.on('connection', (socket) => {
     socket.emit('test', 'Connectedddd');

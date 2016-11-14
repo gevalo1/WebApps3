@@ -1,1 +1,0 @@
-export { UserRoutes } from './UserRoutes';

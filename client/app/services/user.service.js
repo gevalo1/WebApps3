@@ -12,9 +12,9 @@ export default class User {
 	}
 
 	attemptAuth(type, credentials) {
-		let route = (type === 'login') ? '/login' : '';
+		let route = (type === 'login') ? '/login' : '/signup';
 		return this._$http({
-			url: this._AppConstants.api + '/users' + route,
+			url: this._AppConstants.api + route,
 			method: 'POST',
 			data: {
 				user: credentials
@@ -23,7 +23,6 @@ export default class User {
 			(res) => {
 				this._JWT.save(res.data.user.token);
 				this.current = res.data.user;
-				
 				return res;
 			}
 		);
@@ -49,6 +48,9 @@ export default class User {
 			this._$http({
 				url: this._AppConstants.api + '/user',
 				method: 'GET',
+				headers: {
+				  Authorization: this._JWT.get()
+				}
 			}).then(
 				(res) => {
 					this.current = res.data.user;
@@ -64,7 +66,7 @@ export default class User {
 	}
 	
 	ensureAuthIs(bool) {
-		/*let deferred = this._$q.defer();
+		let deferred = this._$q.defer();
 		
 		this.verifyAuth().then((authValid) => {
 			if (authValid !== bool) {
@@ -74,11 +76,6 @@ export default class User {
 				deferred.resolve(true);
 			}
 		})
-		return deferred.promise;*/
-		
-		console.log("Auth is currently disabled.");
-		let deferred = this._$q.defer();
-		deferred.resolve(true);
 		return deferred.promise;
 	}
 	
