@@ -90,7 +90,7 @@ gulp.task('serve', ['nodemon'], () => {
   var compiler = webpack(config);
 
   serve({
-    port: process.env.PORT || 8080,
+    port: process.env.PORT || 8081,
     open: false,
     proxy: {
             target: 'localhost:8085', // original port

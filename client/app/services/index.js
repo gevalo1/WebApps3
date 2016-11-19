@@ -9,4 +9,7 @@ servicesModule.service('User', UserService);
 import JwtService from './jwt.service';
 servicesModule.service('JWT', JwtService);
 
+import DrawingService from './drawing.service';
+servicesModule.service('Drawing', DrawingService);
+
 export default servicesModule;

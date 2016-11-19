@@ -1,9 +1,11 @@
 class CanvasCtrl {
-  constructor(AppConstants, $scope) {
+  constructor(AppConstants, Drawing, $scope, $mdDialog) {
     'ngInject';
 
     this.appName = AppConstants.appName;
+	this._Drawing = Drawing
 	this._$scope = $scope;
+	this._$mdDialog = $mdDialog;
 	
 	this.socket = io();
 	
@@ -19,6 +21,11 @@ class CanvasCtrl {
 	this.App.socket.on('clearCanvas', () => {
 		this.App.clear();
 	});
+	
+	$scope.showSuccessAlert = false;
+	$scope.switchBool = function(value) {
+		$scope[value] = !$scope[value];
+	}
 	
 	//Add JQuery listeners
 	this.initListeners();
@@ -116,12 +123,18 @@ class CanvasCtrl {
 	
 	initListeners() {
 		$(document).on('click', '#clearCv', (e) => {
-			const answer = prompt('Enter the password for clearing the canvas.');
+			const app = this.App;
+			let confirm = this._$mdDialog.confirm()
+				.title('Clear the canvas?')
+				.textContent('Are you sure you want to clear the canvas?')
+				.ariaLabel('clearCanvasConfirm')
+				.ok("Yes, I'm sure!")
+				.cancel('No, take me back.');
 
-			if (answer === 'password') { //Will be changed later on
-				this.App.clear();
-				this.App.socket.emit('clearCanvas');
-			}
+			this._$mdDialog.show(confirm).then(function() {
+				app.clear();
+				app.socket.emit('clearCanvas');
+			});
 		});
 		
 		$(document).on('click', '#changeBrushSize', (e) => {
@@ -141,8 +154,42 @@ class CanvasCtrl {
 			this.ownColor = selectedColor;
 			this.toggleColorList();
 		});
+		
+		$(document).on('click', '#saveDrawing', (e) => {
+			const scope = this._$scope;
+			const canvas = this.App.canvas;
+			const Drawing = this._Drawing;
+			let confirm = this._$mdDialog.prompt()
+				.title('Name your drawing')
+				.textContent('Please give your drawing a name.')
+				.placeholder('Name...')
+				.ariaLabel('Drawing Name')
+				.ok('Save!')
+				.cancel('Cancel');
+
+			this._$mdDialog.show(confirm).then(function(result) {
+				if (result != undefined) {
+					//save drawing
+					const dataURL = canvas.toDataURL();
+					Drawing.attemptSave(dataURL).then(
+						(res) => {
+							console.log(res);
+						},
+						(err) => {
+							console.log(err);
+						}
+					);
+				} else {
+					scope.textAlert = "You didn't name your drawing!";
+					scope.textTitle = "ERROR: "
+					if (!scope.showSuccessAlert) {
+						scope.switchBool('showSuccessAlert');
+					}
+				}
+			});
+		});
 	};
-	
+			
 	toggleColorList() {
 		$('#colorList').slideToggle();
 	};

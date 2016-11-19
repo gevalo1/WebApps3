@@ -12,6 +12,10 @@
 		<div id="blue" class="color"/>
 		<div id="purple" class="color"/>
 	</div>
+	<div class="alert alert-success alertCustom" ng-show="showSuccessAlert">
+		<button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+		<strong>{{textTitle}}</strong> {{textAlert}}
+	</div>
 </div>
 	
 <div id="content">
@@ -20,6 +24,7 @@
 	<div id="sidebar">
 		<md-button id="clearCv" class="md-fab icon ion-ios-trash" aria-label="Clear Canvas"/>
 		<md-button id="changeBrushSize" class="md-fab icon ion-record" aria-label="Brush Size"/>
+		<md-button id="saveDrawing" class="md-fab icon ion-image" aria-label="Save Image to Server"/>
 	</div>
 	
 </div>
