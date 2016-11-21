@@ -127,6 +127,17 @@ button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing 
 	background-color: #A349A4;
 }
 
+#images {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+.homeDrawing {
+	width: 22%;
+}
+.homeDrawing:not(:nth-child(4n)) {
+	margin-right: 4%;
+}
+
 .color {
 	width: 50px;
 	height: 50px;

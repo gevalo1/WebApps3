@@ -22,7 +22,7 @@ module.exports = function (app) {
 	});
 	
 	app.get('/api/drawing', (req, res, next) => {
-		drawHandle.getDrawing(req, res);
+		drawHandle.handle(req, res);
 	});
 
 };

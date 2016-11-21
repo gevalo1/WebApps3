@@ -10,11 +10,12 @@ export default class Drawing {
 		this.user = User.current;
 	}
 	
-	attemptSave(canvasData) {
+	attemptSave(drawingName, canvasData) {
 		return this._$http({
 			url: this._AppConstants.api + '/drawing',
 			method: 'POST',
 			data: {
+				drawingName: drawingName,
 				canvas: canvasData,
 				user: this.user
 			}
@@ -23,5 +24,19 @@ export default class Drawing {
 				return res;
 			}
 		);
+	}
+	
+	getDrawings() {
+		return this._$http({
+				url: this._AppConstants.api + '/drawing',
+				method: 'GET'
+			}).then(
+				(res) => {
+					return res;
+				},
+				(err) => {
+					console.log(err);
+				}
+			);
 	}
 }

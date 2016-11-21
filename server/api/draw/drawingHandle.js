@@ -1,5 +1,5 @@
 'use strict';
-const User = require("../../models/drawing");
+const Drawing = require("../../models/drawing");
 
 module.exports.handle =
     function handle(req, res) {
@@ -9,7 +9,7 @@ module.exports.handle =
 				postDrawing(req, res);
                 break;
             case 'GET':
-				getDrawing(req, res);
+				getDrawings(req, res);
                 break;
             default:
                 res.end;
@@ -17,11 +17,27 @@ module.exports.handle =
         }
 		
 		function postDrawing(req, res) {
-			console.log(req.body);
+			
+			let db = new Drawing({
+				byUsername: req.body.user.username,
+				drawingName: req.body.drawingName,
+				drawingData: req.body.canvas,
+				createdAt: new Date()
+			});
+			
+			db.save();
+			res.json("success");
 		}
 		
-		function getDrawing(req, res) {
-			
+		function getDrawings(req, res) {
+			Drawing.find( {} ).sort( {createdAt: -1} ).exec((err, result) => {
+				if (result) {
+					req.result = result;
+					res.json(req.result);
+				} else {
+					res.status(500).send("Something went wrong while retrieving all drawings from the database.");
+				}
+			});
 		}
 		
 	};

@@ -166,12 +166,13 @@ class CanvasCtrl {
 				.ariaLabel('Drawing Name')
 				.ok('Save!')
 				.cancel('Cancel');
+			console.log(confirm);
 
-			this._$mdDialog.show(confirm).then(function(result) {
+			this._$mdDialog.show(confirm).then((result) => {
 				if (result != undefined) {
 					//save drawing
-					const dataURL = canvas.toDataURL();
-					Drawing.attemptSave(dataURL).then(
+					const dataURL = canvas.toDataURL("image/png");
+					Drawing.attemptSave(result, dataURL).then(
 						(res) => {
 							console.log(res);
 						},
