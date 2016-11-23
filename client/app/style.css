@@ -6,7 +6,7 @@ html, body, #fullheight {
 	overflow: hidden;
 }
 
-h1 {
+h1, p, ul {
 	margin: 0 !important;
 }
 
@@ -157,3 +157,93 @@ button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing 
 
 .close{float:right;font-size:20px;font-weight:bold;line-height:20px;color:#000000;text-shadow:0 1px 0 #ffffff;opacity:0.6;filter:alpha(opacity=60);}.close:hover{color:#000000;text-decoration:none;cursor:pointer;opacity:0.4;filter:alpha(opacity=40);}
 button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-appearance:none;}
+
+/* Home Page */
+#home-navbar {
+	width: 100%;
+	height: 8%;
+	
+}
+
+ul {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	text-align: center;
+}
+
+li {
+	display: inline-block;
+}
+
+.canvas-button {
+	height: 100%;
+	width: 10%;
+	float: left;
+	position: relative;
+	background-color: #3B3B3B;
+}
+
+.canvas-button a {
+	display: block;
+	color: white;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	text-decoration: none;
+}
+
+.canvas-button a:before {
+	content:'';
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+
+.canvas-button a:hover {
+	box-shadow: 0 4px 2px -2px gray;
+}
+
+.authDiv {
+	display: inline-block;
+	width: 10%;
+	height: 100%;
+	float: right;
+}
+
+.auth-button {
+	height: 100%;
+	width: 50%;
+	float: right;
+	background-color: #3B3B3B;
+}
+
+.auth-button a {
+	display: block;
+	color: white;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+}
+
+.auth-button a:before {
+	content:'';
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+
+.auth-button a:hover {
+	box-shadow: 0 4px 2px -2px gray;
+}
+
+h1 {
+	display: inline-block;
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* End Home Page */

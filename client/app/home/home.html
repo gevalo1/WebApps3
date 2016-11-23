@@ -1,44 +1,48 @@
 <div class="home-page">
 
-  <p>This is the home page and still needs to be changed, we are planning to show different rooms here and probably some information...</p>
-  
-  <ul>
+	<div id="home-navbar">
+		<ul>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          ui-sref-active="active"
-          ui-sref="app.canvas">
-          Canvas
-        </a>
-      </li>
-
-	  <div ng-hide="$ctrl.authed">
-		  <li class="nav-item">
+		  <li class="nav-item canvas-button">
 			<a class="nav-link"
 			  ui-sref-active="active"
-			  ui-sref="app.login">
-			  Sign in
+			  ui-sref="app.canvas">
+			  Canvas
 			</a>
 		  </li>
+		  
+		  <h1>WebApps 3 Drawing Application</h1>
 
-		  <li class="nav-item">
-			<a class="nav-link"
-			  ui-sref-active="active"
-			  ui-sref="app.register">
-			  Sign up
-			</a>
-		  </li>
-	  </div>
-	  
-	  <li class="nav-item" show-authed="true">
-        <a class="nav-link" href=""
-		  ui-sref-active="active"
-          ng-click="$ctrl.logout()">
-          Logout
-        </a>
-      </li>
+		  <div ng-hide="$ctrl.authed" class="authDiv">
+			  <li class="nav-item auth-button">
+				<a class="nav-link"
+				  ui-sref-active="active"
+				  ui-sref="app.login">
+				  Sign in
+				</a>
+			  </li>
 
-    </ul>
+			  <li class="nav-item auth-button">
+				<a class="nav-link"
+				  ui-sref-active="active"
+				  ui-sref="app.register">
+				  Sign up
+				</a>
+			  </li>
+		  </div>
+		  
+		  <div show-authed="true" class="authDiv">
+			  <li class="nav-item auth-button">
+				<a class="nav-link" href=""
+				  ui-sref-active="active"
+				  ng-click="$ctrl.logout()">
+				  Logout
+				</a>
+			  </li>
+		  </div>
+
+		</ul>
+	</div>
 	
 	<div id="images">
 	
