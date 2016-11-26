@@ -82,6 +82,15 @@ button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing 
 	font-size: 35px;
 	color: #575252 !important;
 }
+button#submitCustomColor {
+	background-color: gray !important;
+	font-size: 14px;
+	color: #575252 !important;
+	width: 24px;
+	min-height: 24px;
+	height: 24px;
+	line-height: 24px;
+}
 
 #footerText {
 	color: #CBCACA;
@@ -247,3 +256,21 @@ h1 {
 }
 
 /* End Home Page */
+
+#customColor {
+	display: none;
+	Width: 10%;
+	position: absolute;
+	top: 5px;
+	left: 20vh;
+}
+.customColorLabel {
+	color: white;
+	font-size: 0.95vw;
+}
+.customColorInput {
+	width: 60%;
+	background-color: #575252;
+	color: white;
+	border: 1px solid gray;
+}

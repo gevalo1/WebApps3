@@ -1,5 +1,4 @@
 <div id="navbar">
-	<!--<select id="colorOptions"></select>-->
 	<md-button id="colorOptions" class="md-fab icon ion-android-color-palette" aria-label="Change Color"/>
 	<div id="colorList">
 		<div id="black" class="color"/>
@@ -12,8 +11,13 @@
 		<div id="blue" class="color"/>
 		<div id="purple" class="color"/>
 	</div>
-	<div class="alert alert-success alertCustom" ng-show="showSuccessAlert">
-		<button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+	<div id="customColor">
+		<label class="customColorLabel">Custom Color</label>
+		<input class="customColorInput" ng-model="colorModel" placeholder="HEX/Color..." ng-model="customColor">
+		<md-button id="submitCustomColor" ng-click="submitCustomColor(colorModel)" class="md-fab icon ion-checkmark" aria-label="SubmitCustomColor"/>
+	</div>
+	<div class="alert alert-success alertCustom" ng-show="showAlert">
+		<button type="button" class="close" data-ng-click="switchBool('showAlert')" >×</button>
 		<strong>{{textTitle}}</strong> {{textAlert}}
 	</div>
 </div>

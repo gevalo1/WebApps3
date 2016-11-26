@@ -22,9 +22,15 @@ class CanvasCtrl {
 		this.App.clear();
 	});
 	
-	$scope.showSuccessAlert = false;
+	$scope.showAlert = false;
 	$scope.switchBool = function(value) {
 		$scope[value] = !$scope[value];
+	}
+	
+	$scope.submitCustomColor = (hexColor) => {
+		this.App.ctx.strokeStyle = hexColor;
+		this.ownColor = hexColor;
+		this.toggleColorChooser();
 	}
 	
 	//Add JQuery listeners
@@ -60,6 +66,10 @@ class CanvasCtrl {
 		};
 		this.App.clear = () => {
 			this.App.ctx.clearRect(0, 0, this.App.canvas.width, this.App.canvas.height);
+		};
+		this.App.changeBrushSize = (size) => {
+			this.App.ctx.lineWidth = size;
+			this.ownBrushSize = size;
 		};
 		this.App.canvas.addEventListener("mousemove", (e) => {
 			this.App.findxy('move', e);
@@ -137,22 +147,15 @@ class CanvasCtrl {
 			});
 		});
 		
-		$(document).on('click', '#changeBrushSize', (e) => {
-			const answer = prompt('Enter brush size.');
-
-			this.App.ctx.lineWidth = answer;
-			this.ownBrushSize = answer;
-		});
-		
 		$(document).on('click', '#colorOptions', (e) => {
-			this.toggleColorList();
+			this.toggleColorChooser();
 		});
 		
 		$(document).on('click', '.color', (e) => {
 			const selectedColor = $(e.currentTarget).attr('id');
 			this.App.ctx.strokeStyle = selectedColor;
 			this.ownColor = selectedColor;
-			this.toggleColorList();
+			this.toggleColorChooser();
 		});
 		
 		$(document).on('click', '#saveDrawing', (e) => {
@@ -160,13 +163,12 @@ class CanvasCtrl {
 			const canvas = this.App.canvas;
 			const Drawing = this._Drawing;
 			let confirm = this._$mdDialog.prompt()
-				.title('Name your drawing')
-				.textContent('Please give your drawing a name.')
+				.title('Name and save your drawing')
+				.textContent('Please give your drawing a name. This will also save the drawing and show it on the home page.')
 				.placeholder('Name...')
 				.ariaLabel('Drawing Name')
 				.ok('Save!')
 				.cancel('Cancel');
-			console.log(confirm);
 
 			this._$mdDialog.show(confirm).then((result) => {
 				if (result != undefined) {
@@ -183,16 +185,41 @@ class CanvasCtrl {
 				} else {
 					scope.textAlert = "You didn't name your drawing!";
 					scope.textTitle = "ERROR: "
-					if (!scope.showSuccessAlert) {
-						scope.switchBool('showSuccessAlert');
+					if (!scope.showAlert) {
+						scope.switchBool('showAlert');
+					}
+				}
+			});
+		});
+		
+		$(document).on('click', '#changeBrushSize', (e) => {
+			const scope = this._$scope;
+			const app = this.App;
+			let confirm = this._$mdDialog.prompt()
+				.title('Choose brush size')
+				.textContent('Please choose the size of your brush')
+				.placeholder('Size...')
+				.ariaLabel('Brush Size')
+				.ok('Ok!')
+				.cancel('Cancel');
+
+			this._$mdDialog.show(confirm).then((result) => {
+				if (result != undefined) {
+					app.changeBrushSize(result);
+				} else {
+					scope.textAlert = "You didn't enter a brush size!";
+					scope.textTitle = "ERROR: "
+					if (!scope.showAlert) {
+						scope.switchBool('showAlert');
 					}
 				}
 			});
 		});
 	};
 			
-	toggleColorList() {
+	toggleColorChooser() {
 		$('#colorList').slideToggle();
+		$('#customColor').toggle();
 	};
 	  
 }
