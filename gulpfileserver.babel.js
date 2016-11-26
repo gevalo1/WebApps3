@@ -2,6 +2,7 @@
 import gulp from 'gulp';
 import del from 'del';
 import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import ngAnnotate from 'browserify-ngannotate';
@@ -12,6 +13,7 @@ import ejs from 'gulp-ejs';
 import inject from 'gulp-inject';
 import concat from 'gulp-concat';
 import minifyCSS from 'gulp-minify-css';
+import uglify from 'gulp-uglify';
 
 // Where our files are located
 var jsFiles   = "client/app/**/*.js";
@@ -46,6 +48,8 @@ gulp.task('browserify', ['views'], () => {
             .bundle()
             .on('error', interceptErrors)
             .pipe(source('main.js'))
+			.pipe(buffer())
+			.pipe(uglify())
             .pipe(gulp.dest('./build/'));
 });
 
