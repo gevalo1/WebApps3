@@ -136,17 +136,6 @@ button#submitCustomColor {
 	background-color: #A349A4;
 }
 
-#images {
-	padding-left: 10%;
-	padding-right: 10%;
-}
-.homeDrawing {
-	width: 22%;
-}
-.homeDrawing:not(:nth-child(4n)) {
-	margin-right: 4%;
-}
-
 .color {
 	width: 50px;
 	height: 50px;
@@ -253,6 +242,42 @@ h1 {
 	position: relative;
     top: 50%;
     transform: translateY(-50%);
+
+}
+
+#newsMessage {
+	margin: 0% 0% 5% 10%;
+	width: 80%;
+	height: 30%;
+	background-color: #B9B0B0;
+	font-size: 1.25em;
+}
+#newsMessage p:first-child {
+	padding: 5% 0% 0% 5%;
+}
+#newsMessage p:not(:first-child) {
+	padding: 1em 0% 0% 5%;
+}
+
+#images {
+	margin-left: 10%;
+	width: 80%;
+	height: 50%;
+	overflow-y: auto;
+	background-color: #B9B0B0;
+}
+.homeDrawingDiv {
+	display: inline-block;
+	width: 22%;
+	margin-bottom: 4%;
+	text-align: center;
+}
+.homeDrawingDiv:not(:nth-child(4n)) {
+	margin-right: 4%;
+}
+.homeDrawing {
+	display: inline-block;
+	width: 100%;
 }
 
 /* End Home Page */

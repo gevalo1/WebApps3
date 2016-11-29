@@ -15,12 +15,15 @@ class HomeCtrl {
   
   getDrawings() {
 	  let src = '';
+	  let drawName = '';
+	  let by = '';
 		this._Drawing.getDrawings().then(
 			(res) => {
-				console.log(res.data);
 				for (let val of res.data) {
 					src = val.drawingData;
-					$('#images').prepend('<img class="homeDrawing" src="' + src + '" />')
+					drawName = val.drawingName;
+					by = val.byUsername;
+					$('#images').prepend('<div class="homeDrawingDiv"><img class="homeDrawing" src="' + src + '" /><span>Title: ' + drawName + '</span><br/><span>By: ' + by + '</span></div>')
 				}
 			},
 			(err) => {
