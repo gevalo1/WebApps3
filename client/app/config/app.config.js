@@ -16,7 +16,7 @@ function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterP
     abstract: true,
     templateUrl: 'layout/app-view.html',
 	resolve: {
-		auth: function(User) {
+		auth: (User) => {
 			return User.verifyAuth();
 		}
 	}

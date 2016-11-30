@@ -10,7 +10,7 @@ function AuthConfig($stateProvider, $httpProvider) {
     templateUrl: 'auth/auth.html',
     title: 'Sign in',
 	resolve: {
-		auth: function(User) {
+		auth: (User) => {
 			return User.ensureAuthIs(false);
 		}
 	}
@@ -22,7 +22,7 @@ function AuthConfig($stateProvider, $httpProvider) {
     templateUrl: 'auth/auth.html',
     title: 'Sign up',
 	resolve: {
-		auth: function(User) {
+		auth: (User) => {
 			return User.ensureAuthIs(false);
 		}
 	}

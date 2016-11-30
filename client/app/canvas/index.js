@@ -1,5 +1,3 @@
-import angular from 'angular';
-
 // Create the module where our functionality can attach to
 let canvasModule = angular.module('app.canvas', []);
 
