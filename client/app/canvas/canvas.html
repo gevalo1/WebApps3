@@ -1,25 +1,34 @@
 <div id="navbar">
-	<md-button id="colorOptions" class="md-fab icon ion-android-color-palette" aria-label="Change Color"/>
-	<div id="colorList">
-		<div id="black" class="color"/>
-		<div id="white" class="color"/>
-		<div id="green" class="color"/>
-		<div id="yellow" class="color"/>
-		<div id="orange" class="color"/>
-		<div id="red" class="color"/>
-		<div id="lightBlue" class="color"/>
-		<div id="blue" class="color"/>
-		<div id="purple" class="color"/>
-	</div>
-	<div id="customColor">
-		<label class="customColorLabel">Custom Color</label>
-		<input class="customColorInput" ng-model="colorModel" placeholder="HEX/Color..." ng-model="customColor">
-		<md-button id="submitCustomColor" ng-click="submitCustomColor(colorModel)" class="md-fab icon ion-checkmark" aria-label="SubmitCustomColor"/>
-	</div>
-	<div class="alert alert-success alertCustom" ng-show="showAlert">
-		<button type="button" class="close" data-ng-click="switchBool('showAlert')" >×</button>
-		<strong>{{textTitle}}</strong> {{textAlert}}
-	</div>
+	<ul class="canvasNav">
+		<li class="nav-item canvas-button">
+			<a class="nav-link"
+				ui-sref-active="active"
+				ui-sref="app.home">
+				Home
+			</a>
+		</li>
+		<md-button id="colorOptions" class="md-fab icon ion-android-color-palette" aria-label="Change Color"/>
+		<div id="colorList">
+			<div id="black" class="color"/>
+			<div id="white" class="color"/>
+			<div id="green" class="color"/>
+			<div id="yellow" class="color"/>
+			<div id="orange" class="color"/>
+			<div id="red" class="color"/>
+			<div id="lightBlue" class="color"/>
+			<div id="blue" class="color"/>
+			<div id="purple" class="color"/>
+		</div>
+		<div id="customColor">
+			<label class="customColorLabel">Custom Color</label>
+			<input class="customColorInput" ng-model="colorModel" placeholder="HEX/Color..." ng-model="customColor">
+			<md-button id="submitCustomColor" ng-click="submitCustomColor(colorModel)" class="md-fab icon ion-checkmark" aria-label="SubmitCustomColor"/>
+		</div>
+		<div class="alert alert-success alertCustom" ng-show="showAlert">
+			<button type="button" class="close" data-ng-click="switchBool('showAlert')" >×</button>
+			<strong>{{textTitle}}</strong> {{textAlert}}
+		</div>
+	</ul>
 </div>
 	
 <div id="content">

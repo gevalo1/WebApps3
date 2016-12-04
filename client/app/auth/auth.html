@@ -1,7 +1,19 @@
 <div class="auth-page">
     <div class="row">
-
-        <h1 class="auth-title" ng-bind="::$ctrl.title"></h1>
+		<div class="auth-header">
+			<ul>
+				<li class="nav-item canvas-button">
+					<a class="nav-link"
+					  ui-sref-active="active"
+					  ui-sref="app.home">
+					  Home
+					</a>
+				</li>
+				<h1 class="auth-title" ng-bind="::$ctrl.title"></h1>
+				<div class="block"></div>
+			</ul>
+			
+		</div>
         <p>
           <a ui-sref="app.login" ng-show="$ctrl.authType === 'register'">
             Have an account?
@@ -13,7 +25,7 @@
 		
 		<p class="auth-error">{{$ctrl.errors}}</p>
 
-			<form name="authForm" novalidate ng-submit="$ctrl.submitForm()">
+			<form name="authForm" novalidate ng-submit="$ctrl.submitForm()" id="authForm">
 			  <fieldset ng-disabled="$ctrl.isSubmitting">
 
 				  <input class="auth-input"
@@ -32,7 +44,7 @@
 					placeholder="Password"
 					ng-model="$ctrl.formData.password" required/>
 
-				<md-button class="auth-button" type="submit" ng-bind="$ctrl.title" ng-disabled="authForm.$invalid" aria-label="auth"/>
+				<md-button class="authSubmit md-raised" type="submit" ng-bind="$ctrl.title" ng-disabled="authForm.$invalid" aria-label="auth"/>
 			  </fieldset>
 			</form>
   </div>

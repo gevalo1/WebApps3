@@ -66,91 +66,9 @@ h1, p, ul {
 	background-color: #575252;
 }
 
-select, option {
-    padding-bottom: 3em;
-    padding-right: 4.5em;
-}
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    text-indent: 1px;
-    text-overflow: '';
-}
-
-button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing {
-	background-color: gray !important;
-	font-size: 35px;
-	color: #575252 !important;
-}
-button#submitCustomColor {
-	background-color: gray !important;
-	font-size: 14px;
-	color: #575252 !important;
-	width: 24px;
-	min-height: 24px;
-	height: 24px;
-	line-height: 24px;
-}
-
 #footerText {
 	color: #CBCACA;
 	text-align: center;
-}
-
-#colorList {
-	width: 50px;
-	height: auto;
-	background-color: gray;
-	z-index: 2;
-	display: none;
-	position: absolute;
-	top: 5px;
-	left: 10vh;
-}
-
-#black {
-	background-color: #000000;
-}
-#white {
-	background-color: #FFFFFF;
-}
-#green {
-	background-color: #22B14C;
-}
-#yellow {
-	background-color: #FFF200;
-}
-#orange {
-	background-color: #FF7F27;
-}
-#red {
-	background-color: #ED1C24;
-}
-#lightBlue {
-	background-color: #00A2E8;
-}
-#blue {
-	background-color: #3F48CC;
-}
-#purple {
-	background-color: #A349A4;
-}
-
-.color {
-	width: 50px;
-	height: 50px;
-	cursor: pointer;
-}
-.color:not(:first-child) {
-	margin-top: 3px;
-}
-
-.alertCustom {
-	padding: 2px;
-	border-radius: 4px;
-	background-color: #e56969;
-	width: 25%;
-	float: right;
 }
 
 .close{float:right;font-size:20px;font-weight:bold;line-height:20px;color:#000000;text-shadow:0 1px 0 #ffffff;opacity:0.6;filter:alpha(opacity=60);}.close:hover{color:#000000;text-decoration:none;cursor:pointer;opacity:0.4;filter:alpha(opacity=40);}
@@ -282,12 +200,125 @@ h1 {
 
 /* End Home Page */
 
+/* Start Auth Page */
+
+.row {
+	height: 100%;
+	text-align: center;
+}
+
+.row a {
+	text-decoration: none;
+	color: #7F7E7E;
+}
+
+.row a:hover {
+	text-decoration: underline;
+}
+
+.auth-header {
+	width: 100%;
+	height: 8%;
+}
+.auth-header ul {
+	text-align: center;
+}
+.auth-header ul li {
+	width: 10%;
+}
+.auth-header ul li a {
+	color: white;
+}
+.auth-header ul li a:hover {
+	text-decoration: none;
+}
+
+.auth-title {
+	color: #191919;
+}
+
+#authForm {
+	display: block;
+	width: 30%;
+	height: auto;
+	margin: 0 auto;
+}
+
+#authForm input {
+	display: block;
+	width: 70%;
+	font-size: 1.1em;
+	margin: 3em auto;
+	padding: 1em;
+	border: 0;
+}
+
+#authForm input:focus {
+	border: 2px solid gray;
+}
+
+#authForm fieldset {
+	border: 0;
+}
+
+.authSubmit {
+	display: block;
+	width: 70%;
+	height: 50px;
+	float: initial;
+	margin: 0 auto;
+}
+
+.block {
+	width: 10%;
+	height: 100%;
+	float: right;
+}
+
+/* End Auth Page */
+
+/* Start Canvas Page */
+
+.canvasNav {
+	text-align: inherit;
+}
+.canvasNav li {
+	width: 5%;
+	text-align: center;
+}
+
+select, option {
+    padding-bottom: 3em;
+    padding-right: 4.5em;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing {
+	background-color: gray !important;
+	font-size: 35px;
+	color: #575252 !important;
+}
+button#submitCustomColor {
+	background-color: gray !important;
+	font-size: 14px;
+	color: #575252 !important;
+	width: 24px;
+	min-height: 24px;
+	height: 24px;
+	line-height: 24px;
+}
+
 #customColor {
 	display: none;
 	Width: 10%;
 	position: absolute;
 	top: 5px;
-	left: 20vh;
+	left: 35vh;
 }
 .customColorLabel {
 	color: white;
@@ -299,3 +330,61 @@ h1 {
 	color: white;
 	border: 1px solid gray;
 }
+
+#colorList {
+	width: 50px;
+	height: auto;
+	background-color: gray;
+	z-index: 2;
+	display: none;
+	position: absolute;
+	top: 5px;
+	left: 25vh;
+}
+
+#black {
+	background-color: #000000;
+}
+#white {
+	background-color: #FFFFFF;
+}
+#green {
+	background-color: #22B14C;
+}
+#yellow {
+	background-color: #FFF200;
+}
+#orange {
+	background-color: #FF7F27;
+}
+#red {
+	background-color: #ED1C24;
+}
+#lightBlue {
+	background-color: #00A2E8;
+}
+#blue {
+	background-color: #3F48CC;
+}
+#purple {
+	background-color: #A349A4;
+}
+
+.color {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.color:not(:first-child) {
+	margin-top: 3px;
+}
+
+.alertCustom {
+	padding: 2px;
+	border-radius: 4px;
+	background-color: #e56969;
+	width: 25%;
+	float: right;
+}
+
+/* End Canvas Page */
