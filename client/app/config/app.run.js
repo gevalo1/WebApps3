@@ -17,5 +17,6 @@ function AppRun(AppConstants, $rootScope) {
   };
 
 }
+AppRun.$inject = ["AppConstants", "$rootScope"]; //Explicit annotation needed!
 
 export default AppRun;

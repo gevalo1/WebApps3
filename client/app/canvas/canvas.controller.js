@@ -51,7 +51,7 @@ class CanvasCtrl {
 		this.App.canvas.onselectstart = () => {
 			return false;
 		};
-		this.App.ctx.fillStyle = 'solid';
+		this.App.ctx.fillStyle = '#000000';
 		this.App.ctx.strokeStyle = '#000000';
 		this.App.ctx.lineWidth = 5;
 		this.App.ctx.lineCap = 'round';

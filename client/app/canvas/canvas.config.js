@@ -1,5 +1,4 @@
 function CanvasConfig($stateProvider) {
-  'ngInject';
 
   $stateProvider
   .state('app.canvas', {
@@ -15,5 +14,6 @@ function CanvasConfig($stateProvider) {
   });
 
 };
+CanvasConfig.$inject = ["$stateProvider"]; //Explicit annotation needed!
 
 export default CanvasConfig;

@@ -1,5 +1,4 @@
 function AuthConfig($stateProvider, $httpProvider) {
-  'ngInject';
 
   // Define the routes
   $stateProvider
@@ -29,5 +28,6 @@ function AuthConfig($stateProvider, $httpProvider) {
   });
 
 };
+AuthConfig.$inject = ["$stateProvider", "$httpProvider"]; //Explicit annotation needed!
 
 export default AuthConfig;

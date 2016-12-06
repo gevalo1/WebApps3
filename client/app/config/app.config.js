@@ -1,7 +1,6 @@
 import authInterceptor from './auth.interceptor';
 
 function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider) {
-  'ngInject';
   
   $httpProvider.interceptors.push(authInterceptor);
 
@@ -25,5 +24,6 @@ function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterP
   $urlRouterProvider.otherwise('/');
 
 }
+AppConfig.$inject = ["$httpProvider", "$stateProvider", "$locationProvider", "$urlRouterProvider"]; //Explicit annotation needed!
 
 export default AppConfig;

@@ -1,5 +1,4 @@
 function HomeConfig($stateProvider) {
-  'ngInject';
 
   $stateProvider
   .state('app.home', {
@@ -11,5 +10,6 @@ function HomeConfig($stateProvider) {
   });
 
 };
+HomeConfig.$inject = ["$stateProvider"]; //Explicit annotation needed!
 
 export default HomeConfig;

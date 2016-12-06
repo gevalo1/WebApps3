@@ -17,5 +17,6 @@ function authInterceptor(JWT, AppConstants, $window, $q) {
 		}
 	}
 }
+authInterceptor.$inject = ["JWT", "AppConstants", "$window", "$q"]; //Explicit annotation needed!
 
 export default authInterceptor;
