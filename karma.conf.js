@@ -22,6 +22,7 @@ module.exports = function(config) {
 		'node_modules/angular-material/angular-material.js',
 		'node_modules/angular-animate/angular-animate.js',
 		'node_modules/angular-aria/angular-aria.js',
+		'node_modules/angular-sanitize/angular-sanitize.js',
 		'http://localhost:9876/socket.io/socket.io.js',
 		'client/app/app.js',
 		{ pattern: 'test-context.js', watched: false }

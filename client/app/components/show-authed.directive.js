@@ -3,10 +3,10 @@ function ShowAuthed(User) {
 	
 	return {
 		restrict: 'A',
-		link: function(scope, element, attrs) {
+		link: (scope, element, attrs) => {
 			scope.User = User;
 			
-			scope.$watch('User.current', function(val){
+			scope.$watch('User.current', (val) => {
 				if (val) {
 					if (attrs.showAuthed === 'true') {
 						element.css({ display: 'inherit' })

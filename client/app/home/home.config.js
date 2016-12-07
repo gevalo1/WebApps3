@@ -1,4 +1,5 @@
 function HomeConfig($stateProvider) {
+  'ngInject';
 
   $stateProvider
   .state('app.home', {

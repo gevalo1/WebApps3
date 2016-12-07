@@ -26,6 +26,20 @@ export default class Drawing {
 		);
 	}
 	
+	getTwelveMostRecentDrawings() {
+		return this._$http({
+				url: this._AppConstants.api + '/drawingLimited',
+				method: 'GET'
+			}).then(
+				(res) => {
+					return res;
+				},
+				(err) => {
+					console.log(err);
+				}
+			);
+	}
+	
 	getDrawings() {
 		return this._$http({
 				url: this._AppConstants.api + '/drawing',

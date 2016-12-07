@@ -17,9 +17,9 @@ class HomeCtrl {
 	  let src = '';
 	  let drawName = '';
 	  let by = '';
-		this._Drawing.getDrawings().then(
+		this._Drawing.getTwelveMostRecentDrawings().then(
 			(res) => {
-				for (let val of res.data) {
+				for (let val of res.data.reverse()) {
 					src = val.drawingData;
 					drawName = val.drawingName;
 					by = val.byUsername;

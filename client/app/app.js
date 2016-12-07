@@ -26,7 +26,8 @@ const requires = [
   'app.services',
   'app.auth',
   'app.canvas',
-  'ngMaterial'
+  'ngMaterial',
+  'ngSanitize'
 ];
 
 // Mount on window for testing

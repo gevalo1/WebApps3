@@ -21,7 +21,7 @@
 		</div>
 		<div id="customColor">
 			<label class="customColorLabel">Custom Color</label>
-			<input class="customColorInput" ng-model="colorModel" placeholder="HEX/Color..." ng-model="customColor">
+			<input class="customColorInput" ng-model="colorModel" placeholder="HEX/Color..." press-enter="submitCustomColor(colorModel)">
 			<md-button id="submitCustomColor" ng-click="submitCustomColor(colorModel)" class="md-fab icon ion-checkmark" aria-label="SubmitCustomColor"/>
 		</div>
 		<div class="alert alert-success alertCustom" ng-show="showAlert">
@@ -37,6 +37,7 @@
 	<div id="sidebar">
 		<md-button id="clearCv" class="md-fab icon ion-ios-trash" aria-label="Clear Canvas"/>
 		<md-button id="changeBrushSize" class="md-fab icon ion-record" aria-label="Brush Size"/>
+		<md-button id="changeBgColor" class="md-fab icon ion-paintbucket" aria-label="Change Canvas Background Color"/>
 		<md-button id="saveDrawing" class="md-fab icon ion-image" aria-label="Save Image to Server"/>
 	</div>
 	

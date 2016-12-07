@@ -24,5 +24,9 @@ module.exports = function (app) {
 	app.get('/api/drawing', (req, res, next) => {
 		drawHandle.handle(req, res);
 	});
+	
+	app.get('/api/drawingLimited', (req, res, next) => {
+		drawHandle.handle(req, res);
+	});
 
 };

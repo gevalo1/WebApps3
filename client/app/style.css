@@ -298,7 +298,7 @@ select {
     text-overflow: '';
 }
 
-button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing {
+button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing, button#changeBgColor {
 	background-color: gray !important;
 	font-size: 35px;
 	color: #575252 !important;

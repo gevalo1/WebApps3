@@ -162,7 +162,7 @@ class CanvasCtrl {
 			const scope = this._$scope;
 			const canvas = this.App.canvas;
 			const Drawing = this._Drawing;
-			let confirm = this._$mdDialog.prompt()
+			let prompt = this._$mdDialog.prompt()
 				.title('Name and save your drawing')
 				.textContent('Please give your drawing a name. This will also save the drawing and show it on the home page.')
 				.placeholder('Name...')
@@ -170,8 +170,8 @@ class CanvasCtrl {
 				.ok('Save!')
 				.cancel('Cancel');
 
-			this._$mdDialog.show(confirm).then((result) => {
-				if (result != undefined) {
+			this._$mdDialog.show(prompt).then((result) => {
+				if (result !== undefined) {
 					//save drawing
 					const dataURL = canvas.toDataURL("image/png");
 					Drawing.attemptSave(result, dataURL).then(
@@ -195,7 +195,7 @@ class CanvasCtrl {
 		$(document).on('click', '#changeBrushSize', (e) => {
 			const scope = this._$scope;
 			const app = this.App;
-			let confirm = this._$mdDialog.prompt()
+			let prompt = this._$mdDialog.prompt()
 				.title('Choose brush size')
 				.textContent('Please choose the size of your brush')
 				.placeholder('Size...')
@@ -203,11 +203,39 @@ class CanvasCtrl {
 				.ok('Ok!')
 				.cancel('Cancel');
 
-			this._$mdDialog.show(confirm).then((result) => {
-				if (result != undefined) {
+			this._$mdDialog.show(prompt).then((result) => {
+				if (result !== undefined) {
 					app.changeBrushSize(result);
 				} else {
 					scope.textAlert = "You didn't enter a brush size!";
+					scope.textTitle = "ERROR: "
+					if (!scope.showAlert) {
+						scope.switchBool('showAlert');
+					}
+				}
+			});
+		});
+		
+		$(document).on('click', '#changeBgColor', (e) => {
+			const scope = this._$scope;
+			const canvas = this.App.canvas;
+			let prompt = this._$mdDialog.prompt()
+				.title('Change the canvas background color')
+				.htmlContent('Please enter the new color for the canvas background by name or HEX.<br/>(Or enter "default" to reset the default color)<br/><br/>Note: Doing this will NOT remove your drawing.')
+				.placeholder('Color...')
+				.ariaLabel('Background Color')
+				.ok('Ok!')
+				.cancel('Cancel');
+
+			this._$mdDialog.show(prompt).then((result) => {
+				if (result !== undefined) {
+					if (result === "default") {
+						$(canvas).css("background-color", "#E2E2E2");
+					} else {
+						$(canvas).css("background-color", result);
+					}
+				} else {
+					scope.textAlert = "You didn't enter a color for the background!";
 					scope.textTitle = "ERROR: "
 					if (!scope.showAlert) {
 						scope.switchBool('showAlert');

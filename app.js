@@ -19,7 +19,7 @@ const mongoose = require('mongoose'),
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/draw');
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
+db.once('open', () => {
     console.log('Connected to DB');
 });
 
