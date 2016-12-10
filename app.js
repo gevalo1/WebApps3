@@ -62,6 +62,9 @@ io.on('connection', (socket) => {
     socket.on('clearCanvas', () => {
         socket.broadcast.emit('clearCanvas');
     });
+	socket.on('bgColorChange', (bgColor) => {
+		socket.broadcast.emit('bgColorChange', {bgColor});
+	});
 });
 
 // catch 404 and forward to error handler

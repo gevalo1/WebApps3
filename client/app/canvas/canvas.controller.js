@@ -17,7 +17,9 @@ class CanvasCtrl {
 	this.App.socket.on('draw', (data) => {
 		return this.App.draw(data.x, data.y, data.brushSize, data.color, data.prevx, data.prevy);
 	});
-	
+	this.App.socket.on('bgColorChange', (data) => {
+		this.App.changeBgColor(data.bgColor.bgColor);
+	});
 	this.App.socket.on('clearCanvas', () => {
 		this.App.clear();
 	});
@@ -66,6 +68,9 @@ class CanvasCtrl {
 		};
 		this.App.clear = () => {
 			this.App.ctx.clearRect(0, 0, this.App.canvas.width, this.App.canvas.height);
+		};
+		this.App.changeBgColor = (color) => {
+			$(this.App.canvas).css("background-color", color);
 		};
 		this.App.changeBrushSize = (size) => {
 			this.App.ctx.lineWidth = size;
@@ -218,6 +223,7 @@ class CanvasCtrl {
 		
 		$(document).on('click', '#changeBgColor', (e) => {
 			const scope = this._$scope;
+			const app = this.App;
 			const canvas = this.App.canvas;
 			let prompt = this._$mdDialog.prompt()
 				.title('Change the canvas background color')
@@ -230,9 +236,12 @@ class CanvasCtrl {
 			this._$mdDialog.show(prompt).then((result) => {
 				if (result !== undefined) {
 					if (result === "default") {
-						$(canvas).css("background-color", "#E2E2E2");
+						result = "#E2E2E2";
+						app.changeBgColor(result);
+						app.socket.emit('bgColorChange', {bgColor: result});
 					} else {
-						$(canvas).css("background-color", result);
+						app.changeBgColor(result);
+						app.socket.emit('bgColorChange', {bgColor: result});
 					}
 				} else {
 					scope.textAlert = "You didn't enter a color for the background!";
