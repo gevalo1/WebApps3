@@ -184,15 +184,26 @@ class CanvasCtrl {
 					const dataURL = canvas.toDataURL("image/png");
 					Drawing.attemptSave(result, dataURL).then(
 						(res) => {
-							console.log(res);
+							scope.textAlert = "The drawing was saved succesfully!";
+							scope.textTitle = "SUCCESS: ";
+							this.changeAlertBgColor("#60997A");
+							if (!scope.showAlert) {
+								scope.switchBool('showAlert');
+							}
 						},
 						(err) => {
-							console.log(err);
+							scope.textAlert = "Something went wrong while saving the drawing, contact an administrator if this issue persists.";
+							scope.textTitle = "ERROR: ";
+							this.changeAlertBgColor("#e56969");
+							if (!scope.showAlert) {
+								scope.switchBool('showAlert');
+							}
 						}
 					);
 				} else {
 					scope.textAlert = "You didn't name your drawing!";
 					scope.textTitle = "ERROR: "
+					this.changeAlertBgColor("#e56969");
 					if (!scope.showAlert) {
 						scope.switchBool('showAlert');
 					}
@@ -217,6 +228,7 @@ class CanvasCtrl {
 				} else {
 					scope.textAlert = "You didn't enter a brush size!";
 					scope.textTitle = "ERROR: "
+					this.changeAlertBgColor("#e56969");
 					if (!scope.showAlert) {
 						scope.switchBool('showAlert');
 					}
@@ -249,6 +261,7 @@ class CanvasCtrl {
 				} else {
 					scope.textAlert = "You didn't enter a color for the background!";
 					scope.textTitle = "ERROR: "
+					this.changeAlertBgColor("#e56969");
 					if (!scope.showAlert) {
 						scope.switchBool('showAlert');
 					}
@@ -260,6 +273,10 @@ class CanvasCtrl {
 	toggleColorChooser() {
 		$('#colorList').slideToggle();
 		$('#customColor').toggle();
+	};
+	
+	changeAlertBgColor(color) {
+		$(".alertCustom").css("background-color", color);
 	};
 	  
 }

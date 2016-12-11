@@ -14,11 +14,12 @@ class HomeCtrl {
   }
   
   getDrawings() {
-	  let src = '';
-	  let drawName = '';
-	  let by = '';
+		let src = '';
+		let drawName = '';
+		let by = '';
 		this._Drawing.getTwelveMostRecentDrawings().then(
 			(res) => {
+				$("#loading").hide();
 				for (let val of res.data.reverse()) {
 					src = val.drawingData;
 					drawName = val.drawingName;
