@@ -1,6 +1,9 @@
 class CanvasCtrl {
   constructor(AppConstants, Drawing, $scope, $mdDialog) {
     'ngInject';
+	
+	//Unregister all event handlers to prevent double event handlers/memory leaks
+	$(document).off();
 
     this.appName = AppConstants.appName;
 	this._Drawing = Drawing
@@ -227,7 +230,7 @@ class CanvasCtrl {
 			const canvas = this.App.canvas;
 			let prompt = this._$mdDialog.prompt()
 				.title('Change the canvas background color')
-				.htmlContent('Please enter the new color for the canvas background by name or HEX.<br/>(Or enter "default" to reset the default color)<br/><br/>Note: Doing this will NOT remove your drawing.')
+				.htmlContent('Please enter the new color for the canvas background by name or HEX.<br/>(Or enter "default" to reset the default color)<br/><br/>Note: Doing this will NOT remove your drawing. This background will also NOT be saved if you save the drawing!')
 				.placeholder('Color...')
 				.ariaLabel('Background Color')
 				.ok('Ok!')
