@@ -33,9 +33,6 @@ export default class Drawing {
 			}).then(
 				(res) => {
 					return res;
-				},
-				(err) => {
-					console.log(err);
 				}
 			);
 	}
@@ -47,9 +44,6 @@ export default class Drawing {
 			}).then(
 				(res) => {
 					return res;
-				},
-				(err) => {
-					console.log(err);
 				}
 			);
 	}
