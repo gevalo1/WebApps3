@@ -3,29 +3,29 @@ $container-width: 100%;
 $container-height: 100%;
 
 html, body, #fullheight {
-    min-height: $container-height !important;
+    min-height: 100% !important;
     height: $container-height;
     width: $container-width;
     margin: 0px;
-	overflow: hidden;
+    overflow: hidden;
 }
 
-h1 {
-	margin: 0 !important;
+h1, p, ul {
+    margin: 0 !important;
 }
 
 #wrapper {
     height: $container-height;
     width: $container-width;
-	background-color: $mainColor;
+    background-color: $mainColor;
 }
 
 #navbar {
-    height: $container-height / 10;
+    height: $container-height - 90%;
     width: $container-width;
     float: left;
-	background-color: $mainColor;
-}	
+    background-color: $mainColor;
+}
 
 #content {
     max-width: $container-width;
@@ -35,7 +35,7 @@ h1 {
 }
 
 .ng-scope {
-	height: $container-height;
+    height: $container-height;
 }
 
 #cvContainer {
@@ -49,76 +49,360 @@ h1 {
     width: auto;
     overflow: hidden;
     text-align: center;
-	background-color: $mainColor;
+    background-color: $mainColor;
 }
 
 #canvas {
-	background-color: #E2E2E2;
-	position: absolute;
+    background-color: #E2E2E2;
+    position: absolute;
 }
 
 #footer {
-    height: $container-height / 25;
+    height: $container-height - 96%;
     width: $container-width;
     float: left;
-	background-color: $mainColor;
-}
-
-button#changeBrushSize, button#clearCv, button#colorOptions {
-	background-color: gray !important;
-	font-size: 35px;
-	color: $mainColor !important;
+    background-color: $mainColor;
 }
 
 #footerText {
-	color: #CBCACA;
-	text-align: center;
+    color: #CBCACA;
+    text-align: center;
+}
+
+.close{ float: right; font-size: 20px; font-weight: bold; line-height: 20px; color: #000000; text-shadow: 0 1px 0 #ffffff; opacity: 0.6; filter: alpha(opacity=60); } .close:hover{ color: #000000; text-decoration: none; cursor: pointer; opacity: 0.4; filter: alpha(opacity=40); }
+button.close{ padding: 0; cursor: pointer; background: transparent; border: 0; -webkit-appearance: none;}
+
+/* Home Page */
+#home-navbar {
+    width: $container-width;
+    height: $container-height - 92%;
+
+}
+
+ul {
+    width: $container-width;
+    height: $container-height;
+    padding: 0;
+    text-align: center;
+}
+
+li {
+    display: inline-block;
+}
+
+.canvas-button {
+    height: $container-height;
+    width: $container-width - 90%;
+    float: left;
+    position: relative;
+    background-color: #3B3B3B;
+
+    a {
+        display: block;
+        color: white;
+        width: $container-width;
+        height: $container-height;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        text-decoration: none;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            height: $container-height;
+            vertical-align: middle;
+        }
+
+        &:hover {
+            box-shadow: 0 4px 2px -2px gray;
+        }
+    }
+}
+
+.authDiv {
+    display: inline-block;
+    width: $container-width - 90%;
+    height: $container-height;
+    float: right;
+}
+
+.auth-button {
+    height: $container-height;
+    width: $container-width - 50%;
+    float: right;
+    background-color: #3B3B3B;
+
+    a {
+        display: block;
+        color: white;
+        width: $container-width;
+        height: $container-height;
+        text-decoration: none;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            height: $container-height;
+            vertical-align: middle;
+        }
+
+        &:hover {
+            box-shadow: 0 4px 2px -2px gray;
+        }
+    }
+}
+
+h1 {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+
+#newsMessage {
+    margin: 0% 0% 5% 10%;
+    width: $container-width - 20%;
+    height: $container-height - 70%;
+    background-color: #B9B0B0;
+    font-size: 1.25em;
+
+    p:first-child {
+        padding: 5% 0% 0% 5%;
+    }
+
+    p:not(:first-child) {
+        padding: 1em 0% 0% 5%;
+    }
+}
+
+#images {
+    margin-left: 10%;
+    width: $container-width - 20%;
+    height: $container-height - 50%;
+    overflow-y: auto;
+    background-color: #B9B0B0;
+}
+.homeDrawingDiv {
+    display: inline-block;
+    width: $container-width - 78%;
+    margin-bottom: 4%;
+    text-align: center;
+}
+.homeDrawingDiv:not(:nth-child(4n)) {
+    margin-right: 4%;
+}
+.homeDrawing {
+    display: inline-block;
+    width: $container-width;
+}
+
+#loading {
+    width: $container-width;
+    height: $container-height;
+    text-align: center;
+
+    h1 {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+/* End Home Page */
+
+/* Start Auth Page */
+
+.row {
+    height: $container-height;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        color: #7F7E7E;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.auth-header {
+    width: $container-width;
+    height: $container-height - 92%;
+
+    ul {
+        text-align: center;
+
+        li {
+            width: $container-width - 90%;
+
+            a {
+                color: white;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+.auth-title {
+    color: #191919;
+}
+
+#authForm {
+    display: block;
+    width: $container-width - 70%;
+    height: auto;
+    margin: 0 auto;
+
+    input {
+        display: block;
+        width: $container-width - 30%;
+        font-size: 1.1em;
+        margin: 3em auto;
+        padding: 1em;
+        border: 0;
+
+        &:focus {
+            border: 2px solid gray;
+        }
+    }
+
+    fieldset {
+        border: 0;
+    }
+}
+
+.authSubmit {
+    display: block;
+    width: $container-width - 30%;
+    height: 50px;
+    float: initial;
+    margin: 0 auto;
+}
+
+.block {
+    width: $container-width - 90%;
+    height: $container-height;
+    float: right;
+}
+
+/* End Auth Page */
+
+/* Start Canvas Page */
+
+.canvasNav {
+    text-align: inherit;
+
+    li {
+        width: $container-width - 95%;
+        text-align: center;
+    }
+}
+
+select, option {
+    padding-bottom: 3em;
+    padding-right: 4.5em;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+button#changeBrushSize, button#clearCv, button#colorOptions, button#saveDrawing, button#changeBgColor {
+    background-color: gray !important;
+    font-size: 35px;
+    color: $mainColor !important;
+}
+button#submitCustomColor {
+    background-color: gray !important;
+    font-size: 14px;
+    color: $mainColor !important;
+    width: 24px;
+    min-height: 24px;
+    height: 24px;
+    line-height: 24px;
+}
+
+#customColor {
+    display: none;
+    width: $container-width - 90%;
+    position: absolute;
+    top: 5px;
+    left: 35vh;
+}
+.customColorLabel {
+    color: white;
+    font-size: 0.95vw;
+}
+.customColorInput {
+    width: 60%;
+    background-color: $mainColor;
+    color: white;
+    border: 1px solid gray;
 }
 
 #colorList {
-	width: 50px;
-	height: auto;
-	background-color: gray;
-	z-index: 2;
-	display: none;
-	position: absolute;
-	top: 5px;
-	left: 10vh;
+    width: 50px;
+    height: auto;
+    background-color: gray;
+    z-index: 2;
+    display: none;
+    position: absolute;
+    top: 5px;
+    left: 25vh;
 }
 
 #black {
-	background-color: #000000;
+    background-color: #000000;
 }
 #white {
-	background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 #green {
-	background-color: #22B14C;
+    background-color: #22B14C;
 }
 #yellow {
-	background-color: #FFF200;
+    background-color: #FFF200;
 }
 #orange {
-	background-color: #FF7F27;
+    background-color: #FF7F27;
 }
 #red {
-	background-color: #ED1C24;
+    background-color: #ED1C24;
 }
 #lightBlue {
-	background-color: #00A2E8;
+    background-color: #00A2E8;
 }
 #blue {
-	background-color: #3F48CC;
+    background-color: #3F48CC;
 }
 #purple {
-	background-color: #A349A4;
+    background-color: #A349A4;
 }
 
 .color {
-	width: 50px;
-	height: 50px;
-	cursor: pointer;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+    &:not(:first-child) {
+        margin-top: 3px;
+    }
 }
-.color:not(:first-child) {
-	margin-top: 3px;
+
+.alertCustom {
+    padding: 2px;
+    border-radius: 4px;
+    background-color: #e56969;
+    width: $container-width - 75%;
+    float: right;
 }
+
+/* End Canvas Page */

@@ -1,8 +1,8 @@
 function PressEnter() {
-	
-	return {
-		restrict: 'A',
-		link: (scope, element, attrs) => {
+
+    return {
+        restrict: 'A',
+        link: (scope, element, attrs) => {
             element.bind("keydown keypress", (event) => {
                 if (event.which === 13) {
                     scope.$apply(() => {
@@ -13,7 +13,7 @@ function PressEnter() {
                 }
             });
         }
-	};
+    };
 }
 
 export default PressEnter;

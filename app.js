@@ -13,8 +13,8 @@ const server = http.createServer(app);
 const io = require('socket.io').listen(server);
 
 const mongoose = require('mongoose'),
-    db = mongoose.connection,
-    User = require('./server/models/user');
+        db = mongoose.connection,
+        User = require('./server/models/user');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/draw');
@@ -62,9 +62,9 @@ io.on('connection', (socket) => {
     socket.on('clearCanvas', () => {
         socket.broadcast.emit('clearCanvas');
     });
-	socket.on('bgColorChange', (bgColor) => {
-		socket.broadcast.emit('bgColorChange', {bgColor});
-	});
+    socket.on('bgColorChange', (bgColor) => {
+        socket.broadcast.emit('bgColorChange', {bgColor});
+    });
 });
 
 // catch 404 and forward to error handler

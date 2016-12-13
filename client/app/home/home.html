@@ -1,60 +1,60 @@
 <div class="home-page">
 
-	<div id="home-navbar">
-		<ul>
+    <div id="home-navbar">
+        <ul>
 
-		  <li class="nav-item canvas-button">
-			<a class="nav-link"
-			  ui-sref-active="active"
-			  ui-sref="app.canvas">
-			  Canvas
-			</a>
-		  </li>
-		  
-		  <h1>WebApps 3 Drawing Application</h1>
+            <li class="nav-item canvas-button">
+                <a class="nav-link"
+                   ui-sref-active="active"
+                   ui-sref="app.canvas">
+                    Canvas
+                </a>
+            </li>
 
-		  <div ng-hide="$ctrl.authed" class="authDiv">
-			  <li class="nav-item auth-button">
-				<a class="nav-link"
-				  ui-sref-active="active"
-				  ui-sref="app.login">
-				  Sign in
-				</a>
-			  </li>
+            <h1>WebApps Drawing Application</h1>
 
-			  <li class="nav-item auth-button">
-				<a class="nav-link"
-				  ui-sref-active="active"
-				  ui-sref="app.register">
-				  Sign up
-				</a>
-			  </li>
-		  </div>
-		  
-		  <div show-authed="true" class="authDiv">
-			  <li class="nav-item auth-button">
-				<a class="nav-link" href=""
-				  ui-sref-active="active"
-				  ng-click="$ctrl.logout()">
-				  Logout
-				</a>
-			  </li>
-		  </div>
+            <div ng-hide="$ctrl.authed" class="authDiv">
+                <li class="nav-item auth-button">
+                    <a class="nav-link"
+                       ui-sref-active="active"
+                       ui-sref="app.login">
+                        Sign in
+                    </a>
+                </li>
 
-		</ul>
-	</div>
-	
-	<div id="newsMessage">
-		<p>Welcome to the home page of this Drawing Application.</p>
-		<p>This website allows you to draw alone or with other people. You can also name your drawing and save it, it will then display here on the home page.</p>
-		<p>Below you can see a list of drawings that were already saved by other people.</p>
-		<p>This website was developed by Thomas Buys.</p>
-	</div>
-	
-	<div id="images">
-		<div id="loading">
-			<h1>Loading images...</h1>
-		</div>
-	</div>
+                <li class="nav-item auth-button">
+                    <a class="nav-link"
+                       ui-sref-active="active"
+                       ui-sref="app.register">
+                        Sign up
+                    </a>
+                </li>
+            </div>
+
+            <div show-authed="true" class="authDiv">
+                <li class="nav-item auth-button">
+                    <a class="nav-link" href=""
+                       ui-sref-active="active"
+                       ng-click="$ctrl.logout()">
+                        Logout
+                    </a>
+                </li>
+            </div>
+
+        </ul>
+    </div>
+
+    <div id="newsMessage">
+        <p>Welcome to the home page of this Drawing Application.</p>
+        <p>This website allows you to draw alone or with other people. You can also name your drawing and save it, it will then display here on the home page.</p>
+        <p>Below you can see a list of drawings that were already saved by other people.</p>
+        <p>This website was developed by Thomas Buys.</p>
+    </div>
+
+    <div id="images">
+        <div id="loading">
+            <h1>Loading images...</h1>
+        </div>
+    </div>
 
 </div>

@@ -1,4 +1,3 @@
-
 // Import our app config files
 import constants  from './config/app.constants';
 import appConfig  from './config/app.config';
@@ -9,7 +8,7 @@ import './config/app.templates';
 import './layout';
 import './components';
 import './home';
-import './services'
+import './services';
 import './auth';
 import './canvas';
 //development
@@ -18,16 +17,16 @@ import './canvas';
 
 // Create and bootstrap application
 const requires = [
-  'ui.router',
-  'templates',
-  'app.layout',
-  'app.components',
-  'app.home',
-  'app.services',
-  'app.auth',
-  'app.canvas',
-  'ngMaterial',
-  'ngSanitize'
+    'ui.router',
+    'templates',
+    'app.layout',
+    'app.components',
+    'app.home',
+    'app.services',
+    'app.auth',
+    'app.canvas',
+    'ngMaterial',
+    'ngSanitize'
 ];
 
 // Mount on window for testing
@@ -40,5 +39,5 @@ angular.module('app').config(appConfig);
 angular.module('app').run(appRun);
 
 angular.bootstrap(document, ['app'], {
-  strictDi: true
+    strictDi: true
 });

@@ -1,4 +1,4 @@
-WebApps 3: Project
+WebApps: Project
 =
 
 Drawing Web Application
@@ -14,6 +14,7 @@ Features:
 * Authentication (& sessions)
 * Custom colors
 * Custom brush size
+* Change Canvas Background color
 * Clear the Canvas
 * Home Page showing several saved drawings
 * More to come...

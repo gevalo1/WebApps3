@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 let userSchema = mongoose.Schema({
 
     local: {
-        email: { type : String , unique : true, required : true },
-        password: { type : String , unique : false, required : true },
-        username: { type : String , unique : true, required : true },
+        email: {type: String, unique: true, required: true},
+        password: {type: String, unique: false, required: true},
+        username: {type: String, unique: true, required: true},
         joinDate: Date,
-		token: String
+        token: String
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date

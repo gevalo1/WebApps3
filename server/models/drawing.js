@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 
 let drawingSchema = mongoose.Schema({
 
-    byUsername: { type : String , required : true },
-	drawingName: { type : String , required : true },
-	drawingData: { type : String , required : true },
-	createdAt: Date
+    byUsername: {type: String, required: true},
+    drawingName: {type: String, required: true},
+    drawingData: {type: String, required: true},
+    createdAt: Date
 
 });
 
